@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import IconPerson from '@/components/icons/IconPerson.vue';
-import IconShow from '@/components/icons/IconShow.vue';
-import IconHide from '@/components/icons/IconHide.vue';
+import GuestInput from '@/components/base/GuestInput.vue';
 import { ref } from 'vue';
 
 const form = ref({
@@ -13,42 +11,34 @@ const showPassword = ref(false);
 function togglePassword() {
     showPassword.value = !showPassword.value;
 };
+
+function submit() {
+    console.log(form.value);
+};
 </script>
 
 <template>
   <div class="login-form">
-      <div class="login-input-container">
-          <input
-              type="text"
-              class="login-input"
-              placeholder="Email"
-              :value="form.email"
-          >
+      <GuestInput
+        v-model="form.email"
+        placeholder="Email"
+        type="email"
+        icon="email"
+      />
 
-          <IconPerson class="login-input-icon"/>
-      </div>
+      <GuestInput
+        v-model="form.password"
+        placeholder="Password"
+        type="password"
+        icon="password"
+        @keydown.enter="submit"
+      />
 
-      <div class="login-input-container">
-          <input
-              :type="showPassword ? 'text' : 'password'"
-              class="login-input"
-              placeholder="Password"
-              :value="form.password"
-          >
-
-          <IconShow
-              v-if="showPassword"
-              class="login-input-icon password"
-              @click="togglePassword"
-          />
-          <IconHide
-              v-else
-              class="login-input-icon password"
-              @click="togglePassword"
-          />
-      </div>
-
-      <button class="login-button">
+      <button
+        class="login-button"
+        @click="submit"
+        @keydown.enter="submit"
+      >
           Login
       </button>
   </div>
@@ -64,41 +54,6 @@ function togglePassword() {
     width: 300px;
     gap: 53px;
     margin-top: -150px;
-    .login-input-container {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #FFF;
-        width: 100%;
-
-        .login-input {
-            width: 100%;
-            height: 48px;
-            background-color: transparent;
-            border: none;
-            
-            color: #FFF;
-            font-size: 17.926px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-
-            &::placeholder {
-                color: #FFF;
-            }
-
-            &:focus {
-                outline: none;
-            }
-        }
-
-        .login-input-icon {
-            &.password {
-                cursor: pointer;
-                width: 24px;
-                height: 24px;
-            }
-        }
-    } 
     .login-button {
         width: 100%;
         height: 50px;

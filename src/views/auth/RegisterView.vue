@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import GuestLayout from '@/layouts/GuestLayout.vue';
-import LoginForm from '@/components/auth/LoginForm.vue';
+import RegisterForm from '@/components/auth/RegisterForm.vue';
 </script>
 
 <template>
     <GuestLayout>
-        <LoginForm />
+        <RegisterForm />
     </GuestLayout>
 </template>
