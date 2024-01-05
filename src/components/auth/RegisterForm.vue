@@ -1,17 +1,31 @@
 <script setup lang="ts">
 import GuestInput from '@/components/base/GuestInput.vue';
+import usersService from '@/api/modules/users';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const { createUser } = usersService()
+const router = useRouter()
+const isRequesting = ref(false)
 const form = ref({
     name: '',
     username: '',
     email: '',
     password: '',
-    confirm_password: '',
+    confirmPassword: '',
 });
 
 function submit() {
-    console.log(form.value);
+  isRequesting.value = true
+
+  createUser(form.value)
+    .then(() => {
+      router.push({ name: 'dashboard' })
+    })
+    .finally(() => {
+      isRequesting.value = false
+    })
+
 };
 </script>
 
@@ -47,7 +61,7 @@ function submit() {
       />
 
       <GuestInput
-        v-model="form.confirm_password"
+        v-model="form.confirmPassword"
         placeholder="Confirm Password"
         type="password"
         icon="password"

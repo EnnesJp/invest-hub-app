@@ -18,8 +18,10 @@ function submit() {
 
   login(form.value)
     .then(() => {
-      isRequesting.value = false
       router.push({ name: 'dashboard' })
+    })
+    .finally(() => {
+      isRequesting.value = false
     })
 };
 </script>
