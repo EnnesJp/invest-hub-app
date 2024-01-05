@@ -1,19 +1,26 @@
 <script setup lang="ts">
 import GuestInput from '@/components/base/GuestInput.vue';
+import authService from '@/api/modules/auth';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const form = ref({
     email: '',
     password: '',
 });
-const showPassword = ref(false);
 
-function togglePassword() {
-    showPassword.value = !showPassword.value;
-};
+const { login } = authService()
+const isRequesting = ref(false)
+const router = useRouter()
 
 function submit() {
-    console.log(form.value);
+  isRequesting.value = true
+
+  login(form.value)
+    .then(() => {
+      isRequesting.value = false
+      router.push({ name: 'dashboard' })
+    })
 };
 </script>
 
@@ -39,7 +46,7 @@ function submit() {
         @click="submit"
         @keydown.enter="submit"
       >
-          Login
+        Login
       </button>
   </div>
 </template>
