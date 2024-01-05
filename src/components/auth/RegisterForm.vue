@@ -4,6 +4,7 @@ import { ref } from 'vue';
 
 const form = ref({
     name: '',
+    username: '',
     email: '',
     password: '',
     confirm_password: '',
@@ -19,6 +20,13 @@ function submit() {
       <GuestInput
         v-model="form.name"
         placeholder="Name"
+        type="text"
+        icon="person"
+      />
+
+      <GuestInput
+        v-model="form.username"
+        placeholder="Username"
         type="text"
         icon="person"
       />
