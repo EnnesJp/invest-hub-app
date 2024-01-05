@@ -18,7 +18,11 @@ module.exports = {
       ],
       'extends': [
         'plugin:cypress/recommended'
-      ]
+      ],
+      rules: {
+        '@typescript-eslint/no-shadow': 'off',
+        semi: ['error', 'never'],
+      }
     }
   ],
   parserOptions: {

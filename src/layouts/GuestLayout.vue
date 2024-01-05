@@ -1,16 +1,8 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import { RouterLink } from 'vue-router'
 </script>
 
 <template>
     <div class="guest-layout">
-        <div>
-            <RouterLink to="/">
-                <ApplicationLogo class="guest-layout-logo" color="#FFF"/>
-            </RouterLink>
-        </div>
-
         <div>
             <slot />
         </div>
@@ -19,10 +11,14 @@ import { RouterLink } from 'vue-router'
 
 <style scoped lang="scss">
 .guest-layout {
-    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
-    .guest-layout-logo {
-        width: 100px;
-        height: 100px;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url(../assets/images/auth/banner.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 </style>
