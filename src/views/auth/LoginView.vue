@@ -2,8 +2,19 @@
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import IconLogo from '@/components/icons/IconLogo.vue';
 import IconPerson from '@/components/icons/IconPerson.vue';
-import IconEye from '@/components/icons/IconEye.vue';
+import IconShow from '@/components/icons/IconShow.vue';
+import IconHide from '@/components/icons/IconHide.vue';
+import { ref } from 'vue';
 
+const form = ref({
+    email: '',
+    password: '',
+});
+const showPassword = ref(false);
+
+function togglePassword() {
+    showPassword.value = !showPassword.value;
+};
 </script>
 
 <template>
@@ -12,15 +23,34 @@ import IconEye from '@/components/icons/IconEye.vue';
             <IconLogo class="login-logo" color="#CFD8DC"/>
             <div class="login-form">
                 <div class="login-input-container">
-                    <input type="text" class="login-input" placeholder="Email">
+                    <input
+                        type="text"
+                        class="login-input"
+                        placeholder="Email"
+                        :value="form.email"
+                    >
 
                     <IconPerson class="login-input-icon"/>
                 </div>
 
                 <div class="login-input-container">
-                    <input type="password" class="login-input" placeholder="Password">
+                    <input
+                        :type="showPassword ? 'text' : 'password'"
+                        class="login-input"
+                        placeholder="Password"
+                        :value="form.password"
+                    >
 
-                    <IconEye class="login-input-icon"/>
+                    <IconShow
+                        v-if="showPassword"
+                        class="login-input-icon password"
+                        @click="togglePassword"
+                    />
+                    <IconHide
+                        v-else
+                        class="login-input-icon password"
+                        @click="togglePassword"
+                    />
                 </div>
 
                 <button class="login-button">
@@ -78,6 +108,14 @@ import IconEye from '@/components/icons/IconEye.vue';
     
                 &:focus {
                     outline: none;
+                }
+            }
+
+            .login-input-icon {
+                &.password {
+                    cursor: pointer;
+                    width: 24px;
+                    height: 24px;
                 }
             }
         } 
