@@ -24,10 +24,10 @@ function togglePassword() {
 </script>
 
 <template>
-  <div class="login-input-container">
+  <div class="input-container">
       <input
           :type="showPassword ? 'text' : props.type"
-          class="login-input"
+          class="input"
           :placeholder="placeholder"
           :value="modelValue"
           @input="$emit('update:modelValue', $event.target?.value)"
@@ -43,20 +43,20 @@ function togglePassword() {
 </template>
 
 <style scoped lang="scss">
-.login-input-container {
+.input-container {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #FFF;
   width: 100%;
 
-  .login-input {
+  .input {
     width: 100%;
     height: 48px;
     background-color: transparent;
     border: none;
     
     color: #FFF;
-    font-size: 17.926px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -70,7 +70,7 @@ function togglePassword() {
     }
   }
 
-  .login-input-icon {
+  .input-icon {
     &.password {
       cursor: pointer;
     }

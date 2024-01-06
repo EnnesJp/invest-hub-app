@@ -129,7 +129,7 @@ function submit() {
         width: 100%;
         height: 50px;
         border-radius: 4px;
-        background: #CFD8DC;
+        background: #c4a02f;
         border: none;
 
         color: #2A2A2A;
@@ -139,6 +139,18 @@ function submit() {
         font-weight: 700;
         line-height: normal;
         text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+
+        &:disabled {
+            background: #DEDEDE;
+            color: #79808A;
+            cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+            background: #b28d2d;
+        }
     }
 }
 </style>

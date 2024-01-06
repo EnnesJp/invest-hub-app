@@ -99,7 +99,6 @@ const logoutAction = () => {
                 flex-direction: column;
                 justify-content: space-between;
                 margin-top: -180px;
-                padding: 0 45px;
                 .side-bar-menu-link {
                     display: flex;
                     align-items: center;
@@ -108,6 +107,10 @@ const logoutAction = () => {
                     font-weight: 600;
                     gap: 16px;
                     text-decoration: none;
+                    padding: 0 45px;
+                    &:hover {
+                        border-left: 4px solid #4745A4;
+                    }
                 }
             }
         }
@@ -116,7 +119,6 @@ const logoutAction = () => {
             flex-direction: column;
             justify-content: space-between;
             margin-top: 1.5rem;
-            padding: 0 45px;
             .side-bar-menu-link {
                 display: flex;
                 align-items: center;
@@ -125,6 +127,11 @@ const logoutAction = () => {
                 font-weight: 600;
                 text-decoration: none;
                 gap: 16px;
+                cursor: pointer;
+                padding: 0 45px;
+                &:hover {
+                    border-left: 4px solid #4745A4;
+                }
             }
         }
     }
