@@ -1,16 +1,19 @@
 <script setup lang="ts">
 import IconWallet from '@/components/icons/dashboard/IconWallet.vue';
+import IconSave from '@/components/icons/dashboard/IconSave.vue';
 import IconArrow from '@/components/icons/IconArrow.vue';
 import AnimatedPlaceholder from '@/components/base/AnimatedPlaceholder.vue';
 import { defineProps, withDefaults } from 'vue'
 
 interface Props {
   totalBalance?: string
+  netTotal?: string
   isRequesting?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   totalBalance: 'R$ 0,00',
+  netTotal: 'R$ 0,00',
   isRequesting: false,
 })
 </script>
@@ -22,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
       <div class="dashboard-overview__info-item focus">
         <div class="dashboard-overview__info-item-title">
           <IconWallet />
-          Balance
+          Total Balance
         </div>
         <div class="dashboard-overview__info-item-value" v-if="isRequesting">
           <AnimatedPlaceholder
@@ -39,9 +42,19 @@ const props = withDefaults(defineProps<Props>(), {
         </div>
       </div>
       <div class="dashboard-overview__info-item">
-        <div class="dashboard-overview__info-item-title">Total</div>
-        <div class="dashboard-overview__info-item-value">
-          R$ 1,050.44
+        <div class="dashboard-overview__info-item-title">
+          <IconSave />
+          Net Total
+        </div>
+        <div class="dashboard-overview__info-item-value" v-if="isRequesting">
+          <AnimatedPlaceholder
+            width="100%"
+            height="100%"
+            borderRadius="8px"
+          />
+        </div>
+        <div class="dashboard-overview__info-item-value" v-else>
+          {{ netTotal }}
           <IconArrow color="#0D163A"/>
         </div>
       </div>

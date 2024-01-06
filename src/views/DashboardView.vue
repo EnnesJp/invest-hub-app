@@ -9,6 +9,7 @@ const { list } = portfolioService()
 
 const portfolios = ref([])
 const totalBalance = ref(0)
+const netTotal = ref(0)
 const isRequesting = ref(true)
 
 onMounted(() => {
@@ -16,6 +17,9 @@ onMounted(() => {
     .then((response: any) => {
       portfolios.value = response.content.data
       totalBalance.value = StringHelper.formatCurrencyBR(response.content.meta.total_balance)
+      netTotal.value = StringHelper.formatCurrencyBR(
+        response.content.meta.total_balance - response.content.meta.total_tax
+      )
     })
     .finally(() => {
       isRequesting.value = false
@@ -29,11 +33,12 @@ onMounted(() => {
       <div class="dashboard-view__top">
         <DashboardOverview
           :total-balance="totalBalance"
+          :net-total="netTotal"
           :is-requesting="isRequesting"
         />
         <div class="dashboard-saving-plans">
           <div class="dashboard-saving-plans-header">
-            <div class="dashboard-saving-plans__title">Saving Plans</div>
+            <div class="dashboard-saving-plans__title">Portfolios</div>
             <div class="dashboard-saving-plans__link">See All</div>
           </div>
           <div class="dashboard-saving-plans__list">
