@@ -6,7 +6,7 @@ const api = axios.create({
 
 export default function Request() {
   function getToken() {
-    return JSON.parse(window.localStorage.auth).token
+    return window.localStorage.token
   }
 
   function hasUserToken() {

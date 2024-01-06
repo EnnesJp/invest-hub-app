@@ -1,45 +1,52 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
-import IconWallet from '@/components/icons/dashboard/IconWallet.vue';
-import IconArrow from '@/components/icons/IconArrow.vue';
+import DashboardOverview from '@/components/dashboard/DashboardOverview.vue';
+import portfolioService from '@/api/modules/portfolios';
+import StringHelper from '@/helpers/StringHelper';
+import { ref, onMounted } from 'vue';
+
+const { list } = portfolioService()
+
+const portfolios = ref([])
+const totalBalance = ref(0)
+const isRequesting = ref(true)
+
+onMounted(() => {
+  list()
+    .then((response: any) => {
+      portfolios.value = response.content.data
+      totalBalance.value = StringHelper.formatCurrencyBR(response.content.meta.total_balance)
+    })
+    .finally(() => {
+      isRequesting.value = false
+    })
+})
 </script>
 
 <template>
   <AuthenticatedLayout>
     <div class="dashboard-view">
       <div class="dashboard-view__top">
-        <div class="dashboard-overview">
-          <div class="dashboard-overview__title">Overview</div>
-          <div class="dashboard-overview__info">
-            <div class="dashboard-overview__info-item focus">
-              <div class="dashboard-overview__info-item-title">
-                <IconWallet />
-                Balance
+        <DashboardOverview
+          :total-balance="totalBalance"
+          :is-requesting="isRequesting"
+        />
+        <div class="dashboard-saving-plans">
+          <div class="dashboard-saving-plans-header">
+            <div class="dashboard-saving-plans__title">Saving Plans</div>
+            <div class="dashboard-saving-plans__link">See All</div>
+          </div>
+          <div class="dashboard-saving-plans__list">
+            <div 
+              v-for="portfolio in portfolios"
+              :key="portfolio.id"
+              class="dashboard-saving-plans__item"
+            >
+              <div class="dashboard-saving-plans__item-title">
+                {{ portfolio.name }}
               </div>
-              <div class="dashboard-overview__info-item-value">
-                R$ 28,891.138
-                <IconArrow />
-              </div>
-            </div>
-            <div class="dashboard-overview__info-item">
-              <div class="dashboard-overview__info-item-title">Total</div>
-              <div class="dashboard-overview__info-item-value">
-                R$ 1,050.44
-                <IconArrow color="#0D163A"/>
-              </div>
-            </div>
-            <div class="dashboard-overview__info-item">
-              <div class="dashboard-overview__info-item-title">Total</div>
-              <div class="dashboard-overview__info-item-value">
-                R$ 200.31
-                <IconArrow color="#0D163A"/>
-              </div>
-            </div>
-            <div class="dashboard-overview__info-item">
-              <div class="dashboard-overview__info-item-title">Total</div>
-              <div class="dashboard-overview__info-item-value">
-                R$ 21,121.0
-                <IconArrow color="#0D163A"/>
+              <div class="dashboard-saving-plans__item-value">
+                {{ StringHelper.formatCurrencyBR(portfolio.balance) }}
               </div>
             </div>
           </div>
@@ -56,81 +63,69 @@ import IconArrow from '@/components/icons/IconArrow.vue';
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    .dashboard-overview {
+    gap: 32px;
+    width: 100%;
+    .dashboard-saving-plans {
       display: flex;
-      width: 717px;
-      padding: 16px;
       flex-direction: column;
-      justify-content: flex-end;
+      width: 347px;
+      padding: 16px;
       align-items: flex-start;
-      gap: 24px;
+      gap: 48px;
       flex-shrink: 0;
 
       border-radius: 14px;
       background: #FFF;
-      .dashboard-overview__title {
-        font-size: 20px;
-        font-weight: 600;
-        color: #0d163a;
-      }
-      .dashboard-overview__info {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+      .dashboard-saving-plans-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
-        gap: 18px;
-        .dashboard-overview__info-item {
+        padding-bottom: 24px;
+        border-bottom: 1px solid #0D163A1a;
+        .dashboard-saving-plans__title {
+          color: #0D163A;
+          font-feature-settings: 'clig' off, 'liga' off;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          letter-spacing: -1px;
+        }
+        .dashboard-saving-plans__link {
+          color: #4745A4;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 24px;
+        }
+      }
+      .dashboard-saving-plans__list {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 24px;
+        .dashboard-saving-plans__item {
           display: flex;
-          padding: 20px;
-          flex-direction: column;
-          align-items: flex-start;
           justify-content: space-between;
-          flex: 1 0 0;
-          align-self: stretch;
-          gap: 24px;
-
+          align-items: center;
+          width: 100%;
+          padding: 16px;
           border-radius: 14px;
-          border: 1px solid rgba(222, 222, 222, 0.70);
-          background: #FFF;
-
-          &.focus {
-            background: #4745A4;
-            border: none;
-
-            .dashboard-overview__info-item-title {
-              color: #FFF;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.20);
-            }
-            .dashboard-overview__info-item-value {
-              color: #FFF;
-            }
+          background: #F5F5F5;
+          .dashboard-saving-plans__item-title {
+            color: #0D163A;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px;
           }
-          .dashboard-overview__info-item-title {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 9px;
-
-            font-size: 18px;
+          .dashboard-saving-plans__item-value {
+            color: #0D163A;
+            font-size: 16px;
             font-style: normal;
             font-weight: 600;
             line-height: 24px;
-            color: #0d163a;
-            border-bottom: 1px solid #0D163A33;
-            padding-bottom: 18px;
-          }
-          .dashboard-overview__info-item-value {
-            display: flex;
-            width: 100%;
-            align-items: center;
-            justify-content: space-between;
-
-            font-size: 28px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: normal;
-            letter-spacing: -2px;
-            font-family: Plus Jakarta Sans;
-            color: #0d163a;
           }
         }
       }

@@ -108,7 +108,7 @@ const logoutAction = () => {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        width: 300px;
+        width: 280px;
         height: 100vh;
         padding: 1.5rem 0;
         background-color: #fff;
