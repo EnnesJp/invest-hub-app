@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import GuestInput from '@/components/base/GuestInput.vue';
 import usersService from '@/api/modules/users';
+import LoadingSpinner from '@/components/base/LoadingSpinner.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -83,7 +84,7 @@ function submit() {
           @click="submit"
         >
           <LoadingSpinner v-if="isRequesting" />
-          Register
+          <span v-else>Register</span>
         </button>
 
         <div class="alternative">
@@ -159,16 +160,19 @@ function submit() {
           border-radius: 4px;
           background: #c4a02f;
           border: none;
-
-          color: #2A2A2A;
-          text-align: center;
-          font-size: 15px;
-          font-style: normal;
-          font-weight: 700;
-          line-height: normal;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
+          color: #FFF;
           cursor: pointer;
+
+          span {
+            text-align: center;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 700;
+            font-family: 'Roboto', sans-serif;
+            line-height: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+          }
 
           &:disabled {
               background: #DEDEDE;
