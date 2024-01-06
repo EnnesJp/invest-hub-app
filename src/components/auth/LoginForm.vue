@@ -4,6 +4,7 @@ import LoadingSpinner from '@/components/base/LoadingSpinner.vue';
 import authService from '@/api/modules/auth';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { RouterLink } from 'vue-router';
 
 const form = ref({
     email: '',
@@ -44,62 +45,136 @@ function submit() {
         @keydown.enter="submit"
       />
 
-      <button
-        class="login-button"
-        :class="{ loading: isRequesting }"
-        :disabled="isRequesting || !form.email || !form.password"
-        @click="submit"
-        @keydown.enter="submit"
-      >
-        <LoadingSpinner v-if="isRequesting" />
-        <spam v-else>Login</spam>
-      </button>
+      <div class="buttons-container">
+        <button
+          class="login-button"
+          :class="{ loading: isRequesting }"
+          :disabled="isRequesting || !form.email || !form.password"
+          @click="submit"
+          @keydown.enter="submit"
+        >
+          <LoadingSpinner v-if="isRequesting" />
+          <span v-else>Login</span>
+        </button>
+  
+        <div class="alternative">
+          or
+        </div>
+
+        <RouterLink
+          class="register-button"
+          to="/register"
+        >
+          Register
+        </RouterLink>
+      </div>
   </div>
 </template>
 
 
 <style scoped lang="scss">
 .login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  gap: 53px;
+  margin-top: -150px;
+  .buttons-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 300px;
-    gap: 53px;
-    margin-top: -150px;
+    width: 100%;
     .login-button {
-        width: 100%;
-        height: 50px;
-        border-radius: 4px;
-        background: #c4a02f;
-        border: none;
+      width: 100%;
+      height: 40px;
+      border-radius: 4px;
+      color: #FFF;
+      background: #c4a02f;
+      border: none;
+      cursor: pointer;
 
-        color: #2A2A2A;
+      span {
         text-align: center;
         font-size: 15px;
         font-style: normal;
         font-weight: 700;
         font-family: 'Roboto', sans-serif;
-        line-height: normal;
+        line-height: 18px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        cursor: pointer;
+      }
 
-        &:disabled {
-            background: #DEDEDE;
-            color: #79808A;
-            cursor: not-allowed;
-        }
+      &:disabled {
+        background: #DEDEDE;
+        color: #79808A;
+        cursor: not-allowed;
+      }
 
-        &.loading {
-            background: #b28d2d;
-            opacity: 0.8;
-            cursor: not-allowed;
-        }
+      &.loading {
+        background: #b28d2d;
+        opacity: 0.8;
+        cursor: not-allowed;
+      }
 
-        &:hover:not(:disabled) {
-            background: #b28d2d;
-        }
+      &:hover:not(:disabled) {
+        background: #b28d2d;
+      }
     }
+    .alternative {
+      margin: 10px 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr max-content 1fr;
+      grid-column-gap: 20px;
+      align-items: center;
+      font-size: 14px;
+      color: #fff;
+      &:before {
+        content: "";
+        height: 2px;
+        display: block;
+        background-color: #fff;
+      }
+      &:after {
+        content: "";
+        height: 2px;
+        display: block;
+        background-color: #fff;
+      }
+    }
+    .register-button {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+
+      background-color: transparent;
+      color: #b28d2d;
+      border: 2px solid #b28d2d;
+      border-radius: 4px;
+      transition: .3s;
+      cursor: pointer;
+
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 700;
+      font-family: 'Roboto', sans-serif;
+      line-height: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+
+      &:hover:not(:disabled) {
+        background: #c4a02f;
+        border-color: #c4a02f;
+        color: #fff;
+      }
+    }
+  }
 }
 </style>
