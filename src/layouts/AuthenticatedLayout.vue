@@ -119,7 +119,7 @@ const logoutAction = () => {
             height: 100%;
             .side-bar-menu-logo {
                 width: 100%;
-                margin-top: -180px;
+                margin-top: -215px;
             }
             .side-bar-menu-links {
                 display: flex;
