@@ -1,228 +1,132 @@
-<script setup>
-import { ref } from 'vue';
-import IconLogo from '@/Components/IconLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link, usePage } from '@inertiajs/vue3';
+<script setup lang="ts">
+import IconLogoVertical from '@/components/icons/IconLogoVertical.vue';
+import IconDashboard from '@/components/icons/menu/IconDashboard.vue';
+import IconWallet from '@/components/icons/menu/IconWallet.vue';
+import IconChart from '@/components/icons/menu/IconChart.vue';
+import IconUser from '@/components/icons/menu/IconUser.vue';
+import IconSetting from '@/components/icons/menu/IconSetting.vue';
+import IconInfoCircle from '@/components/icons/menu/IconInfoCircle.vue';
+import IconLogout from '@/components/icons/menu/IconLogout.vue';
+import authService from '@/api/modules/auth';
+import { RouterLink } from 'vue-router';
+import { useRouter } from 'vue-router';
 
-const showingNavigationDropdown = ref(false);
+const { logout } = authService()
+const router = useRouter()
+
+const logoutAction = () => {
+  logout();
+  router.push({ name: 'login' });
+};
+
 </script>
 
 <template>
-    <div>
-        <div
-            v-if="showMessage"
-            id="feedbackMessage"
-            class="alert alert-success text-center"
-        >
-            <strong>{{ message }}</strong>
-        </div>
-        <div
-            v-if="showError"
-            id="feedbackMessage"
-            class="alert alert-danger text-center"
-        >
-            <strong>{{ error }}</strong>
-        </div>
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
-                <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
-                        <div class="flex">
-                            <!-- Logo -->
-                            <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <IconLogo
-                                        class="block h-9 w-auto fill-current text-gray-800"
-                                        color="#3e7cf9"
-                                    />
-                                </Link>
-                            </div>
-
-                            <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                        </div>
-
-                        <div class="hidden sm:flex sm:items-center sm:ml-6">
-                            <!-- Settings Dropdown -->
-                            <div class="ml-3 relative">
-                                <Dropdown align="right" width="48">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                            >
-                                                {{ $page.props.auth.user.name }}
-
-                                                <svg
-                                                    class="ml-2 -mr-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </template>
-
-                                    <template #content>
-                                        <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-                                        <DropdownLink :href="route('logout')" method="post" as="button">
-                                            Log Out
-                                        </DropdownLink>
-                                    </template>
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <!-- Hamburger -->
-                        <div class="-mr-2 flex items-center sm:hidden">
-                            <button
-                                @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                            >
-                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex': !showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex': showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+    <div class="authenticated-layout">
+        <div class="side-bar-menu">
+            <div class="side-bar-menu__top">
+                <IconLogoVertical
+                    class="side-bar-menu-logo"
+                    logo-color-secondary="#0D163A"
+                    name-color="#0D163A"
+                />
+                <div class="side-bar-menu-links">
+                    <RouterLink to="/dashboard" class="side-bar-menu-link">
+                        <IconDashboard />
+                        Dashboard
+                    </RouterLink>
+                    <RouterLink to="/wallet" class="side-bar-menu-link">
+                        <IconWallet />
+                        Wallet
+                    </RouterLink>
+                    <RouterLink to="/transactions" class="side-bar-menu-link">
+                        <IconChart />
+                        Transactions
+                    </RouterLink>
+                    <RouterLink to="profile" class="side-bar-menu-link">
+                        <IconUser />
+                        Profile
+                    </RouterLink>
+                    <RouterLink to="/settings" class="side-bar-menu-link">
+                        <IconSetting />
+                        Settings
+                    </RouterLink>
                 </div>
-
-                <!-- Responsive Navigation Menu -->
-                <div
-                    :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }"
-                    class="sm:hidden"
-                >
-                    <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
-                        <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">
-                                {{ $page.props.auth.user.name }}
-                            </div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
-                        </div>
-
-                        <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
-                    </div>
+            </div>
+            <div class="side-bar-menu__bottom">
+                <RouterLink to="/help" class="side-bar-menu-link">
+                    <IconInfoCircle />
+                    Help
+                </RouterLink>
+                <div @click="logoutAction" class="side-bar-menu-link">
+                    <IconLogout />
+                    Logout
                 </div>
-            </nav>
-
-            <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
-
-            <!-- Page Content -->
-            <main>
-                <slot />
-            </main>
+            </div>
         </div>
+    
+        <slot />
     </div>
 </template>
 
-<script>
-const BASE_ROUTE = '/imoveis'
-
-export default {
-    data() {
-        return {
-            page: usePage(),
-            showMessage: false,
-            showError: false,
-            message: '',
-            error: '',
-        }
-    },
-    watch: {
-        page() {
-            this.flash(this.page.props.flash.message, this.page.props.flash.error)
-        }
-    },
-    methods: {
-        flash(message = null, error = null) {
-            if (message) this.showMessage = true
-            if (error) this.showError = true
-
-            this.message = message
-            this.error = error
-
-            setTimeout(() => {
-                this.hide()
-            },4000)
-        },
-        hide() {
-            this.page.props.flash.message = ''
-            this.page.props.flash.error = ''
-            this.showMessage = false
-            this.showError = false
-        },
-        checkFlash() {
-            if(this.page.props.flash.message || this.page.props.flash.error) {
-                this.flash(this.page.props.flash.message, this.page.props.flash.error)
+<style scoped lang="scss">
+.authenticated-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: stretch;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    .side-bar-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 300px;
+        height: 100vh;
+        padding: 1.5rem 0;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .side-bar-menu__top {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            .side-bar-menu-logo {
+                width: 100%;
+                margin-top: -180px;
             }
-        },
-    },
-    updated() {
-        this.checkFlash()
-    },
-    created() {
-        this.checkFlash()
-    },
-}
-</script>
-
-<style scoped>
-#feedbackMessage {
-    position: absolute;
-    max-width: 400px;
-    top: 5px;
-    left: 50%;
-    margin-left: -200px;
+            .side-bar-menu-links {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                margin-top: -180px;
+                padding: 0 45px;
+                .side-bar-menu-link {
+                    display: flex;
+                    align-items: center;
+                    height: 64px;
+                    color: #0d163a;
+                    font-weight: 600;
+                    gap: 16px;
+                    text-decoration: none;
+                }
+            }
+        }
+        .side-bar-menu__bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding: 0 45px;
+            .side-bar-menu-link {
+                display: flex;
+                align-items: center;
+                height: 64px;
+                color: #0d163a;
+                font-weight: 600;
+                text-decoration: none;
+                gap: 16px;
+            }
+        }
+    }
 }
 </style>

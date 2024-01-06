@@ -15,7 +15,12 @@ export default function authService() {
     }
   }
 
+  const logout = () => {
+    store.logout()
+  }
+
   return {
     login,
+    logout
   }
 }
