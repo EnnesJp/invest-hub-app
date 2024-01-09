@@ -10,11 +10,17 @@ import { ref, onMounted } from 'vue';
 const { list } = transactionService()
 const transactions = ref([])
 const isRequesting = ref(true)
+const totalTransactions = ref('')
+const totalCredit = ref('')
+const totalDebit = ref('')
 
 onMounted(() => {
   list()
     .then((response: any) => {
       transactions.value = response.content.data
+      totalTransactions.value = StringHelper.formatCurrencyBR(response.content.meta.total ?? 0)
+      totalCredit.value = StringHelper.formatCurrencyBR(response.content.meta.total_credit ?? 0)
+      totalDebit.value = StringHelper.formatCurrencyBR(response.content.meta.total_debit ?? 0)
     })
     .finally(() => {
       isRequesting.value = false
@@ -42,7 +48,9 @@ onMounted(() => {
           </div>
           <div class="transactions-table-totais__item-info">
             <span class="transactions-table-totais__item-title">Total</span>
-            <span class="transactions-table-totais__item-value">4,500</span>
+            <span class="transactions-table-totais__item-value">
+              {{ totalTransactions }}
+            </span>
           </div>
         </div>
         <div class="transactions-table-totais__item">
@@ -51,7 +59,9 @@ onMounted(() => {
           </div>
           <div class="transactions-table-totais__item-info">
             <span class="transactions-table-totais__item-title">Credit</span>
-            <span class="transactions-table-totais__item-value">4,500</span>
+            <span class="transactions-table-totais__item-value">
+              {{ totalCredit }}
+            </span>
           </div>
         </div>
         <div class="transactions-table-totais__item">
@@ -60,7 +70,9 @@ onMounted(() => {
           </div>
           <div class="transactions-table-totais__item-info">
             <span class="transactions-table-totais__item-title">Debit</span>
-            <span class="transactions-table-totais__item-value">0</span>
+            <span class="transactions-table-totais__item-value">
+              {{ totalDebit }}
+            </span>
           </div>
         </div>
       </div>
@@ -95,7 +107,12 @@ onMounted(() => {
               {{ transaction.description }}
             </span>
             <span class="transactions-table-body__content-item-title center">
-              {{ transaction.type }}
+              <div
+                class="transactions-table-body__content-item-title-badge"
+                :class="transaction.type"
+              >
+                {{ transaction.type }}
+              </div>
             </span>
             <span class="transactions-table-body__content-item-title end number">
                 {{ StringHelper.formatCurrencyBR(transaction.value) }}
@@ -254,7 +271,7 @@ onMounted(() => {
     align-items: flex-start;
     align-self: stretch;
     border-radius: 8px;
-    border: 1px solid #F2F2F2;
+    border: 1px solid #DADADA;
     background-color: #FFF;
     .transactions-table-body__header {
       display: flex;
@@ -263,7 +280,7 @@ onMounted(() => {
       align-items: center;
       width: 100%;
       padding: 16px 24px;
-      border-bottom: 1px solid #F2F2F2;
+      border-bottom: 1px solid #DADADA;
       .transactions-table-body__header-item {
         display: flex;
         flex-direction: column;
@@ -293,7 +310,6 @@ onMounted(() => {
     align-items: flex-start;
     align-self: stretch;
     border-radius: 8px;
-    border: 1px solid #F2F2F2;
     background-color: #FFF;
     overflow-y: scroll;
     max-height: 520px;
@@ -319,8 +335,7 @@ onMounted(() => {
       flex-direction: row;
       justify-content: space-between;
       align-self: stretch;
-      padding: 16px 24px;
-      gap: 4px;
+      padding: 16px 19px 16px 24px;
       width: 100%;
       .transactions-table-body__content-item-title {
         display: flex;
@@ -339,6 +354,24 @@ onMounted(() => {
         &.number {
           font-weight: bold;
           font-family: Plus Jakarta Sans;
+        }
+        .transactions-table-body__content-item-title-badge {
+          display: flex;
+          padding: 6px 12px;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          border-radius: 8px;
+          text-transform: uppercase;
+
+          &.credit {
+            color: #31D3A3;
+            background-color: #31d3a230;
+          }
+          &.debit {
+            color: #FE3766;
+            background-color: #fe376630;
+          }
         }
       }
     }
