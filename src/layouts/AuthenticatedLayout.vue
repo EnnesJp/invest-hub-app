@@ -9,19 +9,32 @@ import IconInfoCircle from '@/components/icons/menu/IconInfoCircle.vue';
 import IconLogout from '@/components/icons/menu/IconLogout.vue';
 import IconSearch from '@/components/icons/IconSearch.vue';
 import authService from '@/api/modules/auth';
-import { RouterLink } from 'vue-router';
-import { useRouter } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
+import { onMounted } from 'vue';
 
 const { logout } = authService()
 const router = useRouter()
 const authStore = useAuthStore();
 
-const logoutAction = () => {
+function logoutAction() {
   logout();
   router.push({ name: 'login' });
 };
 
+function selectMenu() {
+  const menuLinks = document.querySelectorAll('.side-bar-menu-link');
+  menuLinks.forEach((link) => {
+    link.classList.remove('selected');
+  });
+  const currentPath = window.location.pathname;
+  const currentLink = document.querySelector(`a[href="${currentPath}"]`);
+  currentLink?.classList.add('selected');
+};
+
+onMounted(() => {
+  selectMenu();
+});
 </script>
 
 <template>
@@ -36,7 +49,7 @@ const logoutAction = () => {
 
                 <div class="side-bar-menu-links">
                     <RouterLink to="/dashboard" class="side-bar-menu-link">
-                        <IconDashboard />
+                        <IconDashboard color="#F9BA33"/>
                         Dashboard
                     </RouterLink>
 
@@ -50,7 +63,7 @@ const logoutAction = () => {
                         Transactions
                     </RouterLink>
 
-                    <RouterLink to="profile" class="side-bar-menu-link">
+                    <RouterLink to="/profile" class="side-bar-menu-link">
                         <IconUser />
                         Profile
                     </RouterLink>
@@ -138,6 +151,10 @@ const logoutAction = () => {
                     &:hover {
                         border-left: 4px solid var(--color-border-menu);
                     }
+                    &.selected {
+                        border-left: 4px solid var(--color-border-menu);
+                        padding: 0 45px 0 41px;
+                    }
                 }
             }
         }
@@ -158,6 +175,10 @@ const logoutAction = () => {
                 padding: 0 45px;
                 &:hover {
                     border-left: 4px solid var(--color-border-menu);
+                }
+                &.selected {
+                    border-left: 4px solid var(--color-border-menu);
+                    padding: 0 45px 0 41px;
                 }
             }
         }
