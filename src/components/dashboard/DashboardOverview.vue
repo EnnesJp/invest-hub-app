@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import IconWallet from '@/components/icons/dashboard/IconWallet.vue';
-import IconSave from '@/components/icons/dashboard/IconSave.vue';
-import IconArrow from '@/components/icons/IconArrow.vue';
-import AnimatedPlaceholder from '@/components/base/AnimatedPlaceholder.vue';
-import { defineProps, withDefaults } from 'vue'
+import IconWallet from '@/components/icons/dashboard/IconWallet.vue'
+import IconSave from '@/components/icons/dashboard/IconSave.vue'
+import IconArrow from '@/components/icons/IconArrow.vue'
+import AnimatedPlaceholder from '@/components/base/AnimatedPlaceholder.vue'
 
 interface Props {
   totalBalance?: string
