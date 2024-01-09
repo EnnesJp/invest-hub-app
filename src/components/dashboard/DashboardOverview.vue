@@ -73,11 +73,11 @@ const props = withDefaults(defineProps<Props>(), {
   flex-shrink: 0;
 
   border-radius: 14px;
-  background: #FFF;
+  background: var(--color-background);
   .dashboard-overview__title {
     font-size: 20px;
     font-weight: 600;
-    color: #0d163a;
+    color: var(--color-text);
   }
   .dashboard-overview__info {
     display: grid;
@@ -96,18 +96,18 @@ const props = withDefaults(defineProps<Props>(), {
 
       border-radius: 14px;
       border: 1px solid rgba(222, 222, 222, 0.70);
-      background: #FFF;
+      background: var(--color-background);
 
       &.focus {
-        background: #4745A4;
+        background: var(--color-background-dashboard-focus);
         border: none;
 
         .dashboard-overview__info-item-title {
-          color: #FFF;
+          color: var(--color-text-light);
           border-bottom: 1px solid rgba(255, 255, 255, 0.20);
         }
         .dashboard-overview__info-item-value {
-          color: #FFF;
+          color: var(--color-text-light);
         }
       }
       .dashboard-overview__info-item-title {
@@ -120,7 +120,7 @@ const props = withDefaults(defineProps<Props>(), {
         font-style: normal;
         font-weight: 600;
         line-height: 24px;
-        color: #0d163a;
+        color: var(--color-text);
         border-bottom: 1px solid #0D163A33;
         padding-bottom: 18px;
       }
@@ -136,7 +136,7 @@ const props = withDefaults(defineProps<Props>(), {
         line-height: normal;
         letter-spacing: -2px;
         font-family: Plus Jakarta Sans;
-        color: #0d163a;
+        color: var(--color-text);
       }
     }
   }

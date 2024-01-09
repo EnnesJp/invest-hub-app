@@ -31,8 +31,8 @@ import IconLogo from '@/components/icons/IconLogo.vue';
         justify-content: center;
         width: 484px;
         min-height: 100vh;
-        background: rgba(0, 0, 0, 0.4);
-        border-left: 1px solid #FFF;
+        background: var(--color-background-guess);
+        border-left: 1px solid var(--color-border-guess);
         .logo {
             max-width: 100%;
             margin-top: -150px;

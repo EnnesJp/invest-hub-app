@@ -55,14 +55,14 @@ function togglePassword() {
     background-color: transparent;
     border: none;
     
-    color: #FFF;
+    color: var(--color-text-light);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 
     &::placeholder {
-      color: #FFF;
+      color: var(--color-text-light);
     }
 
     &:focus {

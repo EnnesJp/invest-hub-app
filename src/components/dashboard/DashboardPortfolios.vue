@@ -42,19 +42,19 @@ const props = withDefaults(defineProps<Props>(), {
   padding: 16px;
   align-items: flex-start;
   flex-shrink: 0;
-    gap: 24px;
+  gap: 24px;
 
   border-radius: 14px;
-  background: #FFF;
+  background: var(--color-background);
   .dashboard-portfolios-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     padding-bottom: 24px;
-    border-bottom: 1px solid #0D163A1a;
+    border-bottom: 1px solid var(--color-border-menu-transparent);
     .dashboard-portfolios__title {
-      color: #0D163A;
+      color: var(--color-text);
       font-feature-settings: 'clig' off, 'liga' off;
       font-size: 20px;
       font-style: normal;
@@ -63,7 +63,7 @@ const props = withDefaults(defineProps<Props>(), {
       letter-spacing: -1px;
     }
     .dashboard-portfolios__link {
-      color: #4745A4;
+      color: var(--color-text-link);
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
@@ -82,16 +82,16 @@ const props = withDefaults(defineProps<Props>(), {
       width: 100%;
       padding: 16px;
       border-radius: 14px;
-      background: #F5F5F5;
+      background: var(--color-background-soft);
       .dashboard-portfolios__item-title {
-        color: #0D163A;
+        color: var(--color-text);
         font-size: 16px;
         font-style: normal;
         font-weight: 500;
         line-height: 24px;
       }
       .dashboard-portfolios__item-value {
-        color: #0D163A;
+        color: var(--color-text);
         font-size: 16px;
         font-style: normal;
         font-weight: 600;

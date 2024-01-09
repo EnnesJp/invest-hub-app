@@ -103,16 +103,16 @@ const logoutAction = () => {
     align-items: stretch;
     justify-content: stretch;
     min-height: 100vh;
-    background-color: #f5f5f5;
+    background-color: var(--color-background-soft);
     .side-bar-menu {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        width: 280px;
+        width: 300px;
         height: 100vh;
         padding: 1.5rem 0;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: var(--color-background-menu);
+        box-shadow: 0 0 10px var(--color-shadow);
         .side-bar-menu__top {
             display: flex;
             flex-direction: column;
@@ -130,13 +130,13 @@ const logoutAction = () => {
                     display: flex;
                     align-items: center;
                     height: 64px;
-                    color: #0d163a;
+                    color: var(--color-text);
                     font-weight: 600;
                     gap: 16px;
                     text-decoration: none;
                     padding: 0 45px;
                     &:hover {
-                        border-left: 4px solid #4745A4;
+                        border-left: 4px solid var(--color-border-menu);
                     }
                 }
             }
@@ -150,14 +150,14 @@ const logoutAction = () => {
                 display: flex;
                 align-items: center;
                 height: 64px;
-                color: #0d163a;
+                color: var(--color-text);
                 font-weight: 600;
                 text-decoration: none;
                 gap: 16px;
                 cursor: pointer;
                 padding: 0 45px;
                 &:hover {
-                    border-left: 4px solid #4745A4;
+                    border-left: 4px solid var(--color-border-menu);
                 }
             }
         }
@@ -177,7 +177,7 @@ const logoutAction = () => {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                background-color: #fff;
+                background-color: var(--color-background-menu);
                 border-radius: 100px;
                 padding: 13px 20px;
                 width: 722px;
@@ -189,9 +189,9 @@ const logoutAction = () => {
                     width: 100%;
                     height: 100%;
                     font-size: 14px;
-                    color: #0d163a;
+                    color: var(--color-text);
                     &::placeholder {
-                        color: #0d163a;
+                        color: var(--color-text);
                         opacity: 0.5;
                     }
                 }
@@ -201,7 +201,7 @@ const logoutAction = () => {
                 flex-direction: row;
                 align-items: center;
                 gap: 16px;
-                background-color: #fff;
+                background-color: var(--color-background-menu);
                 border-radius: 100px;
                 padding: 13px 20px;
                 height: 64px;
@@ -223,7 +223,7 @@ const logoutAction = () => {
                     }
                     .top-bar__right__user__name {
                         font-size: 14px;
-                        color: #0d163a;
+                        color: var(--color-text);
                         font-weight: 600;
                     }
                 }
