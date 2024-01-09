@@ -38,7 +38,7 @@
   --color-shadow: var(--vt-c-black-shadow);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --color-background: var(--vt-c-black);
     --color-background-guess: var(--vt-c-black-transparent);
@@ -46,7 +46,7 @@
     
     --color-board-guess: var(--vt-c-white);
   }
-}
+} */
 
 *,
 *::before,
