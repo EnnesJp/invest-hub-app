@@ -95,7 +95,7 @@ const props = withDefaults(defineProps<Props>(), {
       gap: 24px;
 
       border-radius: 14px;
-      border: 1px solid rgba(222, 222, 222, 0.70);
+      border: 1px solid var(--color-border-dashboard);
       background: var(--color-background);
 
       &.focus {
@@ -104,7 +104,7 @@ const props = withDefaults(defineProps<Props>(), {
 
         .dashboard-overview__info-item-title {
           color: var(--color-text-light);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+          border-bottom: 1px solid var(--color-border-dashboard-item);
         }
         .dashboard-overview__info-item-value {
           color: var(--color-text-light);
@@ -121,7 +121,7 @@ const props = withDefaults(defineProps<Props>(), {
         font-weight: 600;
         line-height: 24px;
         color: var(--color-text);
-        border-bottom: 1px solid #0D163A33;
+        border-bottom: 1px solid var(--color-border-dashboard-dark);
         padding-bottom: 18px;
       }
       .dashboard-overview__info-item-value {

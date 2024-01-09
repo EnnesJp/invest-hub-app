@@ -90,9 +90,9 @@ const props = withDefaults(defineProps<Props>(), {
     flex: 1 0 0;
 
     border-radius: 10px;
-    border: 1px solid #DADADA;
+    border: 1px solid var(--color-border-table);
 
-    background: #FFF;
+    background: var(--color-background);
     .transactions-table-totais__item-icon {
       display: flex;
       justify-content: center;
@@ -101,7 +101,7 @@ const props = withDefaults(defineProps<Props>(), {
       height: 44px;
       flex-shrink: 0;
       border-radius: 8px;
-      background: #F4F4F4;
+      background: var(--color-background-icon);
 
       svg {
         width: 20px;
@@ -122,7 +122,7 @@ const props = withDefaults(defineProps<Props>(), {
         justify-content: center;
         flex-shrink: 0;
 
-        color: #828282;
+        color: var(--color-text-table);
         font-size: 11px;
         font-style: normal;
         font-weight: 500;
@@ -130,7 +130,7 @@ const props = withDefaults(defineProps<Props>(), {
       }
       .transactions-table-totais__item-value {
         width: 100%;
-        color: #000;
+        color: var(--color-text-dark);
         font-size: 24px;
         font-style: normal;
         font-weight: 500;

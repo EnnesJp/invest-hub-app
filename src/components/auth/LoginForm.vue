@@ -91,8 +91,8 @@ function submit() {
       width: 100%;
       height: 40px;
       border-radius: 4px;
-      color: #FFF;
-      background: #c4a02f;
+      color: var(--color-text-light);
+      background: var(--color-background-primary-light);
       border: none;
       cursor: pointer;
 
@@ -108,19 +108,19 @@ function submit() {
       }
 
       &:disabled {
-        background: #DEDEDE;
-        color: #79808A;
+        background: var(--color-background-disabled);
+        color: var(--color-text-disabled);
         cursor: not-allowed;
       }
 
       &.loading {
-        background: #b28d2d;
+        background: var(--color-background-primary);
         opacity: 0.8;
         cursor: not-allowed;
       }
 
       &:hover:not(:disabled) {
-        background: #b28d2d;
+        background: var(--color-background-primary);
       }
     }
     .alternative {
@@ -131,18 +131,18 @@ function submit() {
       grid-column-gap: 20px;
       align-items: center;
       font-size: 14px;
-      color: #fff;
+      color: var(--color-text-light);
       &:before {
         content: "";
         height: 2px;
         display: block;
-        background-color: #fff;
+        background-color: var(--color-background);
       }
       &:after {
         content: "";
         height: 2px;
         display: block;
-        background-color: #fff;
+        background-color: var(--color-background);
       }
     }
     .register-button {
@@ -154,8 +154,8 @@ function submit() {
       text-decoration: none;
 
       background-color: transparent;
-      color: #b28d2d;
-      border: 2px solid #b28d2d;
+      color: var(--color-text-primary);
+      border: 2px solid var(--color-text-primary);
       border-radius: 4px;
       transition: .3s;
       cursor: pointer;
@@ -170,9 +170,9 @@ function submit() {
       text-align: center;
 
       &:hover:not(:disabled) {
-        background: #c4a02f;
-        border-color: #c4a02f;
-        color: #fff;
+        background: var(--color-background-primary-light);
+        border-color: var(--color-background-primary-light);
+        color: var(--color-text-light);
       }
     }
   }

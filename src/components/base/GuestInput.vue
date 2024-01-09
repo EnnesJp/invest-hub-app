@@ -46,7 +46,7 @@ function togglePassword() {
 .input-container {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #FFF;
+  border-bottom: 1px solid var(--color-background);
   width: 100%;
 
   .input {

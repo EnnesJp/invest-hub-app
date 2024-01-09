@@ -1,50 +1,82 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
   --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f5f5f5;
+  --vt-c-white-soft-1: #f1f1f1;
+  --vt-c-white-soft-4: #f4f4f4;
+  --vt-c-white-soft-5: #f5f5f5;
+  --vt-c-white-20: rgba(255, 255, 255, 0.20);
+
+  --vt-c-grey-darker: #828282;
+  --vt-c-grey-dark: #79808A;
+  --vt-c-grey: #DEDEDE;
+  --vt-c-grey-2: #DADADA;
+  --vt-c-grey-5: #555;
+  --vt-c-grey-8: #888;
+  --vt-c-grey-70: rgba(222, 222, 222, 0.70);
 
   --vt-c-black: #181818;
   --vt-c-black-transparent: rgba(0, 0, 0, 0.4);
   --vt-c-black-shadow: rgba(0, 0, 0, 0.1);
 
   --vt-c-blue-dark: #0d163a;
+  --vt-c-blue-dark-20: #0D163A33;
   --vt-c-blue-dark-transparent: #0D163A1a;
   --vt-c-blue-light: #4745A4;
+  --vt-c-blue-lighter: #606CCB;
 
   --vt-c-yellow-dark: #b28d2d;
   --vt-c-yellow-light: #c4a02f;
+
+  --vt-c-red: #FE3766;
+  --vt-c-red-transparent: #fe376630;
+
+  --vt-c-green: #31D3A3;
+  --vt-c-green-transparent: #31d3a230;
 }
 
 /* semantic color variables for this project */
 :root {
   --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
+  --color-background-disabled: var(--vt-c-grey);
+  --color-background-soft: var(--vt-c-white-soft-5);
   --color-background-guess: var(--vt-c-black-transparent);
   --color-background-menu: var(--vt-c-white);
   --color-background-dashboard-focus: var(--vt-c-blue-light);
-  --color-background-yellow-dark: var(--vt-c-yellow-dark);
-  --color-background-yellow-light: var(--vt-c-yellow-light);
+  --color-background-button: var(--vt-c-blue-lighter);
+  --color-background-primary: var(--vt-c-yellow-dark);
+  --color-background-primary-light: var(--vt-c-yellow-light);
+  --color-background-scrollbar-track: var(--vt-c-white-soft-1);
+  --color-background-scrollbar-thumb: var(--vt-c-grey-8);
+  --color-background-scrollbar-thumb-hover: var(--vt-c-grey-5);
+  --color-background-credit: var(--vt-c-green-transparent);
+  --color-background-debit: var(--vt-c-red-transparent);
+  --color-background-icon: var(--vt-c-white-soft-4);
 
   --color-text: var(--vt-c-blue-dark);
+  --color-text-dark: var(--vt-c-black);
+  --color-text-disabled: var(--vt-c-grey-dark);
   --color-text-light: var(--vt-c-white);
   --color-text-link: var(--vt-c-blue-light);
-  --color-text-yellow-dark: var(--vt-c-yellow-dark);
-  --color-text-yellow-light: var(--vt-c-yellow-light);
+  --color-text-primary: var(--vt-c-yellow-dark);
+  --color-text-primary-light: var(--vt-c-yellow-light);
+  --color-text-table: var(--vt-c-grey-darker);
+  --color-text-credit: var(--vt-c-green);
+  --color-text-debit: var(--vt-c-red);
 
   --color-border-guess: var(--vt-c-white);
   --color-border-menu: var(--vt-c-blue-light);
   --color-border-menu-transparent: var(--vt-c-blue-dark-transparent);
+  --color-border-dashboard: var(--vt-c-grey-70);
+  --color-border-dashboard-dark: var(--vt-c-blue-dark-20);
+  --color-border-dashboard-item: var(--vt-c-white-20);
+  --color-border-table: var(--vt-c-grey-2);
 
   --color-shadow: var(--vt-c-black-shadow);
 }
 
 /* @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-guess: var(--vt-c-black-transparent);
-    --color-background-menu: var(--vt-c-white);
     
-    --color-board-guess: var(--vt-c-white);
   }
 } */
 

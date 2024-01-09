@@ -129,9 +129,9 @@ const props = withDefaults(defineProps<Props>(), {
         border: none;
 
         border-radius: 8px;
-        background: #606CCB;
+        background: var(--color-background-button);
 
-        color: #FFF;
+        color: var(--color-text-light);
 
         text-align: center;
         font-size: 12px;
@@ -159,7 +159,6 @@ const props = withDefaults(defineProps<Props>(), {
         width: 2rem;
         height: 2rem;
         border-radius: 50%;
-        background-color: var(--color-primary);
       }
     }
   }
@@ -169,8 +168,8 @@ const props = withDefaults(defineProps<Props>(), {
     align-items: flex-start;
     align-self: stretch;
     border-radius: 8px;
-    border: 1px solid #DADADA;
-    background-color: #FFF;
+    border: 1px solid var(--color-border-table);
+    background-color: var(--color-background);
     .transactions-table-body__header {
       display: flex;
       flex-direction: row;
@@ -178,7 +177,7 @@ const props = withDefaults(defineProps<Props>(), {
       align-items: center;
       width: 100%;
       padding: 16px 24px;
-      border-bottom: 1px solid #DADADA;
+      border-bottom: 1px solid var(--color-border-table);
       .transactions-table-body__header-item {
         display: flex;
         flex-direction: column;
@@ -193,7 +192,7 @@ const props = withDefaults(defineProps<Props>(), {
           align-items: flex-end;
         }
         .transactions-table-body__header-item-title {
-          color: #828282;
+          color: var(--color-text-table);
           font-size: 11px;
           font-style: normal;
           font-weight: 500;
@@ -208,7 +207,7 @@ const props = withDefaults(defineProps<Props>(), {
     align-items: flex-start;
     align-self: stretch;
     border-radius: 8px;
-    background-color: #FFF;
+    background-color: var(--color-background);
     overflow-y: scroll;
     max-height: 520px;
 
@@ -217,16 +216,16 @@ const props = withDefaults(defineProps<Props>(), {
     }
 
     &::-webkit-scrollbar-track {
-      background: #f1f1f1;
+      background: var(--color-background-scrollbar-track);
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #888;
+      background: var(--color-background-scrollbar-thumb);
       border-radius: 4px;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      background: #555;
+      background: var(--color-background-scrollbar-thumb-hover);
     }
     .transactions-table-body__content-item {
       display: flex;
@@ -237,7 +236,7 @@ const props = withDefaults(defineProps<Props>(), {
       width: 100%;
       .transactions-table-body__content-item-title {
         display: flex;
-        color: #828282;
+        color: var(--color-text-table);
         font-size: 11px;
         font-style: normal;
         font-weight: 500;
@@ -263,12 +262,12 @@ const props = withDefaults(defineProps<Props>(), {
           text-transform: uppercase;
 
           &.credit {
-            color: #31D3A3;
-            background-color: #31d3a230;
+            color: var(--color-text-credit);
+            background-color: var(--color-background-credit);
           }
           &.debit {
-            color: #FE3766;
-            background-color: #fe376630;
+            color: var(--color-text-debit);
+            background-color: var(--color-background-debit);
           }
         }
       }

@@ -3,7 +3,6 @@ import IconShow from '@/components/icons/IconShow.vue';
 import IconHide from '@/components/icons/IconHide.vue';
 import IconMail from '@/components/icons/IconMail.vue';
 import IconPerson from '@/components/icons/IconPerson.vue';
-import { ref } from 'vue';
 
 interface Props {
   icon: string,
