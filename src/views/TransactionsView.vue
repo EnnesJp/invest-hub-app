@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
 import IconSmallWallet from '@/components/icons/IconSmallWallet.vue';
 import IconDirect from '@/components/icons/IconDirect.vue';
 import IconDots from '@/components/icons/IconDots.vue';
+import AnimatedPlaceholder from '@/components/base/AnimatedPlaceholder.vue';
 import transactionService from '@/api/modules/transactions';
 import StringHelper from '@/helpers/StringHelper';
 import { ref, onMounted } from 'vue';
@@ -48,7 +49,14 @@ onMounted(() => {
           </div>
           <div class="transactions-table-totais__item-info">
             <span class="transactions-table-totais__item-title">Total</span>
-            <span class="transactions-table-totais__item-value">
+            <div class="transactions-table-totais__item-value" v-if="isRequesting">
+              <AnimatedPlaceholder
+                width="100%"
+                height="100%"
+                borderRadius="8px"
+              />
+            </div>
+            <span class="transactions-table-totais__item-value" v-else>
               {{ totalTransactions }}
             </span>
           </div>
@@ -59,7 +67,14 @@ onMounted(() => {
           </div>
           <div class="transactions-table-totais__item-info">
             <span class="transactions-table-totais__item-title">Credit</span>
-            <span class="transactions-table-totais__item-value">
+            <div class="transactions-table-totais__item-value" v-if="isRequesting">
+              <AnimatedPlaceholder
+                width="100%"
+                height="100%"
+                borderRadius="8px"
+              />
+            </div>
+            <span class="transactions-table-totais__item-value" v-else>
               {{ totalCredit }}
             </span>
           </div>
@@ -70,7 +85,14 @@ onMounted(() => {
           </div>
           <div class="transactions-table-totais__item-info">
             <span class="transactions-table-totais__item-title">Debit</span>
-            <span class="transactions-table-totais__item-value">
+            <div class="transactions-table-totais__item-value" v-if="isRequesting">
+              <AnimatedPlaceholder
+                width="100%"
+                height="100%"
+                borderRadius="8px"
+              />
+            </div>
+            <span class="transactions-table-totais__item-value" v-else>
               {{ totalDebit }}
             </span>
           </div>
@@ -255,6 +277,7 @@ onMounted(() => {
           line-height: 20.4px; 
         }
         .transactions-table-totais__item-value {
+          width: 100%;
           color: #000;
           font-size: 24px;
           font-style: normal;
