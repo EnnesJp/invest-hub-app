@@ -2,6 +2,24 @@
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
 import IconSmallWallet from '@/components/icons/IconSmallWallet.vue';
 import IconDirect from '@/components/icons/IconDirect.vue';
+import IconDots from '@/components/icons/IconDots.vue';
+import transactionService from '@/api/modules/transactions';
+import StringHelper from '@/helpers/StringHelper';
+import { ref, onMounted } from 'vue';
+
+const { list } = transactionService()
+const transactions = ref([])
+const isRequesting = ref(true)
+
+onMounted(() => {
+  list()
+    .then((response: any) => {
+      transactions.value = response.content.data
+    })
+    .finally(() => {
+      isRequesting.value = false
+    })
+})
 </script>
 
 <template>
@@ -47,7 +65,46 @@ import IconDirect from '@/components/icons/IconDirect.vue';
         </div>
       </div>
       <div class="transactions-table-body">
-
+        <div class="transactions-table-body__header">
+          <div class="transactions-table-body__header-item">
+            <span class="transactions-table-body__header-item-title">Date</span>
+          </div>
+          <div class="transactions-table-body__header-item">
+            <span class="transactions-table-body__header-item-title">Description</span>
+          </div>
+          <div class="transactions-table-body__header-item center">
+            <span class="transactions-table-body__header-item-title">Type</span>
+          </div>
+          <div class="transactions-table-body__header-item end">
+            <span class="transactions-table-body__header-item-title">Value</span>
+          </div>
+          <div class="transactions-table-body__header-item end">
+            <span class="transactions-table-body__header-item-title">Action</span>
+          </div>
+        </div>
+        <div class="transactions-table-body__content">
+          <div
+            class="transactions-table-body__content-item"
+            v-for="transaction in transactions"
+            :key="transaction.id"
+          >
+            <span class="transactions-table-body__content-item-title number">
+              {{ transaction.date }}
+            </span>
+            <span class="transactions-table-body__content-item-title">
+              {{ transaction.description }}
+            </span>
+            <span class="transactions-table-body__content-item-title center">
+              {{ transaction.type }}
+            </span>
+            <span class="transactions-table-body__content-item-title end number">
+                {{ StringHelper.formatCurrencyBR(transaction.value) }}
+            </span>
+            <span class="transactions-table-body__content-item-title end">
+              <IconDots />
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </AuthenticatedLayout>
@@ -198,6 +255,93 @@ import IconDirect from '@/components/icons/IconDirect.vue';
     align-self: stretch;
     border-radius: 8px;
     border: 1px solid #F2F2F2;
+    background-color: #FFF;
+    .transactions-table-body__header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 16px 24px;
+      border-bottom: 1px solid #F2F2F2;
+      .transactions-table-body__header-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 4px;
+        width: 20%;
+        &.center {
+          align-items: center;
+        }
+        &.end {
+          align-items: flex-end;
+        }
+        .transactions-table-body__header-item-title {
+          color: #828282;
+          font-size: 11px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 20.4px; 
+        }
+      }
+    }
+  }
+  .transactions-table-body__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    border-radius: 8px;
+    border: 1px solid #F2F2F2;
+    background-color: #FFF;
+    overflow-y: scroll;
+    max-height: 520px;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    .transactions-table-body__content-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-self: stretch;
+      padding: 16px 24px;
+      gap: 4px;
+      width: 100%;
+      .transactions-table-body__content-item-title {
+        display: flex;
+        color: #828282;
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20.4px; 
+        width: 20%;
+        &.center {
+          justify-content: center;
+        }
+        &.end {
+          justify-content: flex-end;
+        }
+        &.number {
+          font-weight: bold;
+          font-family: Plus Jakarta Sans;
+        }
+      }
+    }
   }
 }
 </style>
