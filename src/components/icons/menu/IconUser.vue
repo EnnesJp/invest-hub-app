@@ -10,6 +10,6 @@ interface Props {
   color?: string
 }
 const props = withDefaults(defineProps<Props>(), {
-  color: '#292D32',
+  color: '#0D163A',
 })
 </script>
