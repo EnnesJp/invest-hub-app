@@ -62,7 +62,7 @@ const props = withDefaults(defineProps<Props>(), {
 <style scoped lang="scss">
 .dashboard-overview {
   display: flex;
-  width: 717px;
+  width: 70%;
   padding: 16px;
   flex-direction: column;
   justify-content: flex-end;

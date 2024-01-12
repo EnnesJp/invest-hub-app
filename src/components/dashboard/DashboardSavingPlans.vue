@@ -54,9 +54,9 @@ onMounted(() => {
           <div
             class="saving-plans-item-body__progress"
             :class="{
-                first: index == 0,
-                second: index == 1,
-                third: index == 2
+              first: index == 0,
+              second: index == 1,
+              third: index == 2
             }"
           >
             {{ getProgress(savingPlan).toFixed(2) }}%
@@ -84,7 +84,7 @@ onMounted(() => {
 .saving-plans {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 27%;
   height: 550px;
   padding: 16px;
   align-items: flex-start;
