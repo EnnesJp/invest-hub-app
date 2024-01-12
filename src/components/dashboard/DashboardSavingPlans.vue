@@ -51,7 +51,14 @@ onMounted(() => {
               / {{ StringHelper.formatCurrencyBR(savingPlan.target_value) }}
             </span>
           </div>
-          <div class="saving-plans-item-body__progress">
+          <div
+            class="saving-plans-item-body__progress"
+            :class="{
+                first: index == 0,
+                second: index == 1,
+                third: index == 2
+            }"
+          >
             {{ getProgress(savingPlan).toFixed(2) }}%
           </div>
         </div>
@@ -171,13 +178,22 @@ onMounted(() => {
           }
         }
         .saving-plans-item-body__progress {
-          color: var(--color-background-dashboard-focus);
           font-family: Plus Jakarta Sans;
           font-size: 18px;
           font-style: normal;
           font-weight: 600;
           line-height: normal;
           letter-spacing: -1px;
+
+          &.first {
+            color: var(--color-text-progress-first);
+          }
+          &.second {
+            color: var(--color-text-progress-second);
+          }
+          &.third {
+            color: var(--color-text-progress-third);
+          }
         }
       }
       .saving-plans-item-progress {
@@ -197,7 +213,7 @@ onMounted(() => {
             height: 100%;
             border-radius: 4px;
             &.first {
-              background: var(--color-background-dashboard-focus);
+              background: var(--color-background-progress-bar-first);
             }
             &.second {
               background: var(--color-background-progress-bar-second);
