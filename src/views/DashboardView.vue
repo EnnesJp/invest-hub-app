@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
 import DashboardOverview from '@/components/dashboard/DashboardOverview.vue';
 import DashboardPortfolios from '@/components/dashboard/DashboardPortfolios.vue';
 import DashboardSavingPlans from '@/components/dashboard/DashboardSavingPlans.vue';
+import DashboardChart from '@/components/dashboard/DashboardChart.vue';
 import portfolioService from '@/api/modules/portfolios';
 import StringHelper from '@/helpers/StringHelper';
 import { ref, onMounted } from 'vue';
@@ -41,6 +42,7 @@ onMounted(() => {
         <DashboardPortfolios :portfolios="portfolios" />
       </div>
       <div class="dashboard-view__bottom">
+        <DashboardChart />
         <DashboardSavingPlans />
       </div>
     </div>
@@ -61,7 +63,7 @@ onMounted(() => {
   }
   .dashboard-view__bottom {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     gap: 32px;
     width: 100%;
   }
