@@ -25,6 +25,7 @@
   --vt-c-blue-lighter: #606CCB;
 
   --vt-c-yellow-dark: #b28d2d;
+  --vt-c-yellow: #F9BA33;
   --vt-c-yellow-light: #c4a02f;
 
   --vt-c-red: #FE3766;
@@ -32,6 +33,7 @@
 
   --vt-c-green: #31D3A3;
   --vt-c-green-transparent: #31d3a230;
+  --vt-c-green-light: #3BBB6E;
 }
 
 /* semantic color variables for this project */
@@ -51,6 +53,8 @@
   --color-background-credit: var(--vt-c-green-transparent);
   --color-background-debit: var(--vt-c-red-transparent);
   --color-background-icon: var(--vt-c-white-soft-4);
+  --color-background-progress-bar-second: var(--vt-c-yellow);
+  --color-background-progress-bar-third: var(--vt-c-green-light);
 
   --color-text: var(--vt-c-blue-dark);
   --color-text-dark: var(--vt-c-black);

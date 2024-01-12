@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<Props>(), {
 .dashboard-portfolios {
   display: flex;
   flex-direction: column;
-  width: 347px;
+  width: 400px;
   padding: 16px;
   align-items: flex-start;
   flex-shrink: 0;
