@@ -5,14 +5,12 @@ import IconArrow from '@/components/icons/IconArrow.vue'
 import AnimatedPlaceholder from '@/components/base/AnimatedPlaceholder.vue'
 
 interface Props {
-  totalBalance?: string
-  netTotal?: string
+  totalBalance?: number
+  netTotal?: number
   isRequesting?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  totalBalance: 'R$ 0,00',
-  netTotal: 'R$ 0,00',
   isRequesting: false,
 })
 </script>
