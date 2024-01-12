@@ -52,7 +52,7 @@ onMounted(() => {
     </div>
     <div class="dashboard-chart__body">
 
-      <canvas id="myChart"></canvas>
+      <canvas id="myChart" width="1056" height="450"></canvas>
     </div>
   </div>
 </template>
@@ -76,7 +76,7 @@ onMounted(() => {
     color: var(--color-text);
   }
   .dashboard-chart__body {
-    width: 85%;
+    width: 100%;
   }
 }
 </style>
