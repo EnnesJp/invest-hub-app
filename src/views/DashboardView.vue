@@ -49,6 +49,9 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .dashboard-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   .dashboard-view__top {
     display: flex;
     justify-content: space-between;
