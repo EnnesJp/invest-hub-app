@@ -51,7 +51,6 @@ onMounted(() => {
       Analytics
     </div>
     <div class="dashboard-chart__body">
-
       <canvas id="myChart" width="1056" height="450"></canvas>
     </div>
   </div>
