@@ -1,47 +1,50 @@
 <script setup lang="ts">
 import Chart from 'chart.js/auto'
-import { onMounted } from 'vue'
+import chartsService from '@/api/modules/charts'
+import { onMounted, ref } from 'vue'
 
-const labels = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December'
-];
-
-const data = {
-  labels: labels,
-  datasets: [{
-    data: [65, 59, 80, 81, 56, 55, 40],
-    fill: false,
-    borderColor: '#4745A4',
-    tension: 0.1
-  }]
-};
-
-const config = {
-  type: 'line',
-  data: data,
-  options: {
-    plugins: {
-      legend: {
-        display: false
-      }
-    }
-  }
-};
+const labels = ref<string[]>([]);
+const values = ref<number[]>([]);
+const { totalPerMonth } = chartsService()
 
 onMounted(() => {
   const ctx = document.getElementById('myChart');
-  new Chart(ctx, config);
+
+  totalPerMonth()
+    .then((response: any) => {
+      response.content.data.forEach((item: any) => {
+        labels.value.push(item.month)
+        values.value.push(item.total)
+      })
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
+    .finally(() => {
+      const data = {
+        labels: labels.value,
+        datasets: [{
+          data: values.value,
+          fill: false,
+          borderColor: '#4745A4',
+          tension: 0.1
+        }]
+      };
+
+      new Chart(ctx,
+        {
+          type: 'line',
+          data: data,
+          options: {
+            plugins: {
+              legend: {
+                display: false
+              }
+            }
+          }
+        }
+      );
+    })
 })
 </script>
 
