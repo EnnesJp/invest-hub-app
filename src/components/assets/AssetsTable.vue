@@ -1,86 +1,86 @@
 <script setup lang="ts">
 import IconDots from '@/components/icons/IconDots.vue';
-import TransactionTotals from '@/components/transactions/TransactionTotals.vue';
 import StringHelper from '@/helpers/StringHelper';
-import type { Transaction } from '@/types/TransactionsHelper';
+import type { Asset } from '@/types/AssetsHelper';
 
 interface Props {
-  transactions?: Array<Transaction>
+  assets?: Array<Asset>
   isRequesting?: boolean
-  totalTransactions?: string
-  totalCredit?: string
-  totalDebit?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  transactions: () => [] as Array<Transaction>,
+  assets: () => [] as Array<Asset>,
   isRequesting: true,
-  totalTransactions: 'R$ 0,00',
-  totalCredit: 'R$ 0,00',
-  totalDebit: 'R$ 0,00',
 })
 </script>
 
 <template>
-  <div class="transactions-table">
-    <div class="transactions-table-header">
-      <div class="transactions-table-header-top">
-        <h1 class="transactions-table-header-top__title">Transaction</h1>
-        <button class="transactions-table-header-top__btn">New Transaction</button>
+  <div class="assets-table">
+    <div class="assets-table-header">
+      <div class="assets-table-header-top">
+        <h1 class="assets-table-header-top__title">Assets</h1>
+        <button class="assets-table-header-top__btn">New Asset</button>
       </div>
-      <div class="transactions-table-header-bottom">
-        <span class="transactions-table-header-bottom__title">summary</span>
-        <div class="transactions-table-header-bottom__filter"></div>
+      <div class="assets-table-header-bottom">
+        <span class="assets-table-header-bottom__title">summary</span>
+        <div class="assets-table-header-bottom__filter"></div>
       </div>
     </div>
-    <TransactionTotals
-      :isRequesting="isRequesting"
-      :totalTransactions="totalTransactions"
-      :totalCredit="totalCredit"
-      :totalDebit="totalDebit"
-    />
-    <div class="transactions-table-body">
-      <div class="transactions-table-body__header">
-        <div class="transactions-table-body__header-item">
-          <span class="transactions-table-body__header-item-title">Date</span>
+    <div class="assets-table-body">
+      <div class="assets-table-body__header">
+        <div class="assets-table-body__header-item">
+          <span class="assets-table-body__header-item-title">Name</span>
         </div>
-        <div class="transactions-table-body__header-item">
-          <span class="transactions-table-body__header-item-title">Description</span>
+        <div class="assets-table-body__header-item end">
+          <span class="assets-table-body__header-item-title">Value</span>
         </div>
-        <div class="transactions-table-body__header-item center">
-          <span class="transactions-table-body__header-item-title">Type</span>
+        <div class="assets-table-body__header-item end">
+          <span class="assets-table-body__header-item-title">Acquisition Date</span>
         </div>
-        <div class="transactions-table-body__header-item end">
-          <span class="transactions-table-body__header-item-title">Value</span>
+        <div class="assets-table-body__header-item center">
+          <span class="assets-table-body__header-item-title">Quantity</span>
         </div>
-        <div class="transactions-table-body__header-item end">
-          <span class="transactions-table-body__header-item-title">Action</span>
+        <div class="assets-table-body__header-item center">
+          <span class="assets-table-body__header-item-title">Liquidity Days</span>
+        </div>
+        <div class="assets-table-body__header-item center">
+          <span class="assets-table-body__header-item-title">Liquidity Date</span>
+        </div>
+        <div class="assets-table-body__header-item end">
+          <span class="assets-table-body__header-item-title">Income Tax</span>
+        </div>
+        <div class="assets-table-body__header-item end">
+          <span class="assets-table-body__header-item-title">Action</span>
         </div>
       </div>
-      <div class="transactions-table-body__content">
+      <div class="assets-table-body__content">
         <div
-          class="transactions-table-body__content-item"
-          v-for="transaction in transactions"
-          :key="transaction.id"
+          class="assets-table-body__content-item"
+          v-for="asset in assets"
+          :key="asset.id"
         >
-          <span class="transactions-table-body__content-item-title number">
-            {{ transaction.date }}
+          <span class="assets-table-body__content-item-title">
+            {{ asset.name }}
           </span>
-          <span class="transactions-table-body__content-item-title">
-            {{ transaction.description }}
+          <span class="assets-table-body__content-item-title end number">
+            {{ StringHelper.formatCurrencyBR(asset.value) }}
           </span>
-          <span class="transactions-table-body__content-item-title center">
-            <div
-              class="transactions-table-body__content-item-title-badge"
-              :class="transaction.type"
-            >
-              {{ transaction.type }}
-            </div>
+          <span class="assets-table-body__content-item-title end">
+            {{ asset.acquisition_date }}
           </span>
-          <span class="transactions-table-body__content-item-title end number">
-              {{ StringHelper.formatCurrencyBR(transaction.value) }}
+          <span class="assets-table-body__content-item-title center number">
+            {{ asset.quantity ?? '-' }}
           </span>
-          <span class="transactions-table-body__content-item-title end">
+          <span class="assets-table-body__content-item-title center number">
+            D +{{ asset.liquidity_days }}
+          </span>
+          <span class="assets-table-body__content-item-title center number">
+            {{ asset.liquidity_date ?? '-' }}
+          </span>
+          <span class="assets-table-body__content-item-title end number">
+            {{ StringHelper.formatCurrencyBR(asset.income_tax) }}
+          </span>
+          <span class="assets-table-body__content-item-title end">
             <IconDots />
           </span>
         </div>
@@ -90,7 +90,7 @@ const props = withDefaults(defineProps<Props>(), {
 </template>
 
 <style scoped lang="scss">
-.transactions-table {
+.assets-table {
   width: 100%;
   height: 100%;
   display: flex;
@@ -99,7 +99,7 @@ const props = withDefaults(defineProps<Props>(), {
   border-radius: 14px;
   padding: 24px;
 
-  .transactions-table-header {
+  .assets-table-header {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -108,18 +108,18 @@ const props = withDefaults(defineProps<Props>(), {
     margin-bottom: 16px;
     width: 100%;
 
-    .transactions-table-header-top {
+    .assets-table-header-top {
       display: flex;
       justify-content: space-between;
       width: 100%;
       align-items: center;
       margin-bottom: 40px;
-      .transactions-table-header-top__title {
+      .assets-table-header-top__title {
         font-size: 20px;
         font-weight: 600;
         color: var(--color-text);
       }
-      .transactions-table-header-top__btn {
+      .assets-table-header-top__btn {
         display: flex;
         height: 40px;
         padding: 8px 16px;
@@ -142,12 +142,12 @@ const props = withDefaults(defineProps<Props>(), {
       }
     }
 
-    .transactions-table-header-bottom {
+    .assets-table-header-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      .transactions-table-header-bottom__title {
+      .assets-table-header-bottom__title {
         font-size: 10px;
         font-weight: 600;
         line-height: 20px;
@@ -155,14 +155,14 @@ const props = withDefaults(defineProps<Props>(), {
         text-transform: uppercase;
         color: var(--color-text);
       }
-      .transactions-table-header-bottom__filter {
+      .assets-table-header-bottom__filter {
         width: 2rem;
         height: 2rem;
         border-radius: 50%;
       }
     }
   }
-  .transactions-table-body {
+  .assets-table-body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -170,7 +170,7 @@ const props = withDefaults(defineProps<Props>(), {
     border-radius: 8px;
     border: 1px solid var(--color-border-table);
     background-color: var(--color-background);
-    .transactions-table-body__header {
+    .assets-table-body__header {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -178,7 +178,7 @@ const props = withDefaults(defineProps<Props>(), {
       width: 100%;
       padding: 16px 24px;
       border-bottom: 1px solid var(--color-border-table);
-      .transactions-table-body__header-item {
+      .assets-table-body__header-item {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -191,7 +191,7 @@ const props = withDefaults(defineProps<Props>(), {
         &.end {
           align-items: flex-end;
         }
-        .transactions-table-body__header-item-title {
+        .assets-table-body__header-item-title {
           color: var(--color-text-table);
           font-size: 11px;
           font-style: normal;
@@ -201,7 +201,7 @@ const props = withDefaults(defineProps<Props>(), {
       }
     }
   }
-  .transactions-table-body__content {
+  .assets-table-body__content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -209,7 +209,7 @@ const props = withDefaults(defineProps<Props>(), {
     border-radius: 8px;
     background-color: var(--color-background);
     overflow-y: scroll;
-    max-height: 520px;
+    max-height: 700px;
 
     &::-webkit-scrollbar {
       width: 5px;
@@ -227,14 +227,14 @@ const props = withDefaults(defineProps<Props>(), {
     &::-webkit-scrollbar-thumb:hover {
       background: var(--color-background-scrollbar-thumb-hover);
     }
-    .transactions-table-body__content-item {
+    .assets-table-body__content-item {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-self: stretch;
       padding: 16px 19px 16px 24px;
       width: 100%;
-      .transactions-table-body__content-item-title {
+      .assets-table-body__content-item-title {
         display: flex;
         color: var(--color-text-table);
         font-size: 11px;
@@ -251,24 +251,6 @@ const props = withDefaults(defineProps<Props>(), {
         &.number {
           font-weight: bold;
           font-family: Plus Jakarta Sans;
-        }
-        .transactions-table-body__content-item-title-badge {
-          display: flex;
-          padding: 6px 12px;
-          justify-content: center;
-          align-items: center;
-          gap: 8px;
-          border-radius: 8px;
-          text-transform: uppercase;
-
-          &.credit {
-            color: var(--color-text-credit);
-            background-color: var(--color-background-credit);
-          }
-          &.debit {
-            color: var(--color-text-debit);
-            background-color: var(--color-background-debit);
-          }
         }
       }
     }
