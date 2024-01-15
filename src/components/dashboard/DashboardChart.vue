@@ -7,6 +7,11 @@ const labels = ref<string[]>([]);
 const values = ref<number[]>([]);
 const { totalPerMonth } = chartsService()
 
+const fontConfig = {
+  size: 14,
+  family: 'Plus Jakarta Sans',
+}
+
 onMounted(() => {
   const ctx = document.getElementById('myChart');
 
@@ -31,19 +36,53 @@ onMounted(() => {
         }]
       };
 
-      new Chart(ctx,
-        {
-          type: 'line',
-          data: data,
-          options: {
-            plugins: {
-              legend: {
-                display: false
-              }
+      new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+          plugins: {
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context: any) {
+                  return 'R$ ' + context.parsed.y
+                }
+              },
+              bodyFont: fontConfig,
             }
-          }
-        }
-      );
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false,
+              },
+              ticks: {
+                color: '#999',
+                font: fontConfig,
+                padding: 20,
+              },
+              border: {
+                display: false,
+              }
+            },
+            y: {
+              ticks: {
+                callback: function (value: any) {
+                  return 'R$ ' + value / 1000 + 'k'
+                },
+                color: '#999',
+                font: fontConfig,
+                padding: 20,
+              },
+              border: {
+                display: false,
+              }
+            },
+          },
+        },
+      });
     })
 })
 </script>
