@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
         class="assets-liquidity__item"
       >
         <div class="assets-liquidity__item-title">
-          D +{{ asset.liquidity_days }}
+          {{ StringHelper.liquidityLabel(asset.liquidity_days) }}
         </div>
         <div class="assets-liquidity__item-value">
           {{ StringHelper.formatCurrencyBR(asset.total_value) }}

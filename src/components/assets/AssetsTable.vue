@@ -72,7 +72,7 @@ const props = withDefaults(defineProps<Props>(), {
             {{ asset.quantity ?? '-' }}
           </span>
           <span class="assets-table-body__content-item-title center number">
-            D +{{ asset.liquidity_days }}
+            {{ StringHelper.liquidityLabel(asset.liquidity_days) }}
           </span>
           <span class="assets-table-body__content-item-title center number">
             {{ asset.liquidity_date ?? '-' }}
