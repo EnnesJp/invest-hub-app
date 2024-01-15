@@ -209,7 +209,7 @@ const props = withDefaults(defineProps<Props>(), {
     border-radius: 8px;
     background-color: var(--color-background);
     overflow-y: scroll;
-    max-height: 700px;
+    max-height: 590px;
 
     &::-webkit-scrollbar {
       width: 5px;
