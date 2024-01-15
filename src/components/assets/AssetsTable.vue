@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<Props>(), {
         <div class="assets-table-body__header-item end">
           <span class="assets-table-body__header-item-title">Value</span>
         </div>
-        <div class="assets-table-body__header-item end">
+        <div class="assets-table-body__header-item center">
           <span class="assets-table-body__header-item-title">Acquisition Date</span>
         </div>
         <div class="assets-table-body__header-item center">
@@ -65,7 +65,7 @@ const props = withDefaults(defineProps<Props>(), {
           <span class="assets-table-body__content-item-title end number">
             {{ StringHelper.formatCurrencyBR(asset.value) }}
           </span>
-          <span class="assets-table-body__content-item-title end">
+          <span class="assets-table-body__content-item-title center">
             {{ asset.acquisition_date }}
           </span>
           <span class="assets-table-body__content-item-title center number">

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import StringHelper from '@/helpers/StringHelper'
-import { Portfolio } from '@/types/DashboardHelper'
+import type { Portfolio } from '@/types/DashboardHelper'
 
 interface Props {
   portfolios?: Array<Portfolio>

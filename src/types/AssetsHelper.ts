@@ -10,3 +10,9 @@ export type Asset = {
   liquidity_date: string;
   income_tax: float;
 };
+
+export type AssetsByLiquidity = {
+  liquidity_days: number;
+  total_value: float;
+  total_income_tax: float;
+};
