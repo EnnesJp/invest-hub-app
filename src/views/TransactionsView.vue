@@ -15,7 +15,7 @@ const totalDebit = ref('')
 onMounted(() => {
   list()
     .then((response: any) => {
-      transactions.value = response.content.data
+      transactions.value = response.content.data.filter((transaction: any) => transaction.value != 0)
       totalTransactions.value = StringHelper.formatCurrencyBR(response.content.meta.total ?? 0)
       totalCredit.value = StringHelper.formatCurrencyBR(response.content.meta.total_credit ?? 0)
       totalDebit.value = StringHelper.formatCurrencyBR(response.content.meta.total_debit ?? 0)
