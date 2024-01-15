@@ -1,40 +1,16 @@
 <script setup lang="ts">
 import StringHelper from '@/helpers/StringHelper'
 import type {
-  Asset,
   AssetsByLiquidity
 } from '@/types/AssetsHelper';
-import { ref, onMounted } from 'vue';
 
 interface Props {
-  assets?: Array<Asset>
+  assets: Array<AssetsByLiquidity>
   isRequesting?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  assets: () => [] as Array<Asset>,
   isRequesting: true,
-})
-
-const assetsByLiquidity = ref([] as Array<AssetsByLiquidity>)
-
-onMounted(() => {
-  props.assets.forEach(asset => {
-    if (assetsByLiquidity.value.some(item => item.liquidity_days === asset.liquidity_days)) {
-      const index = assetsByLiquidity.value.findIndex(item => item.liquidity_days === asset.liquidity_days)
-      assetsByLiquidity.value[index].total_value += asset.value
-      assetsByLiquidity.value[index].total_income_tax += asset.income_tax
-      return
-    }
-
-    assetsByLiquidity.value.push({
-      liquidity_days: asset.liquidity_days,
-      total_value: asset.value,
-      total_income_tax: asset.income_tax,
-    })
-  });
-
-  assetsByLiquidity.value.sort((a, b) => a.liquidity_days - b.liquidity_days)
 })
 </script>
 
@@ -45,7 +21,7 @@ onMounted(() => {
     </div>
     <div class="assets-liquidity__list">
       <div 
-        v-for="(asset, index) in assetsByLiquidity"
+        v-for="(asset, index) in assets"
         :key="index"
         class="assets-liquidity__item"
       >
@@ -84,7 +60,7 @@ onMounted(() => {
       font-feature-settings: 'clig' off, 'liga' off;
       font-size: 20px;
       font-style: normal;
-      font-weight: 700;
+      font-weight: 600;
       line-height: normal;
       letter-spacing: -1px;
     }
