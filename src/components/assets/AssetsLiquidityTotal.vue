@@ -1,33 +1,35 @@
 <script setup lang="ts">
 import StringHelper from '@/helpers/StringHelper'
-import type { Portfolio } from '@/types/DashboardHelper'
+import type {
+  AssetsByLiquidity
+} from '@/types/AssetsHelper';
 
 interface Props {
-  portfolios?: Array<Portfolio>
+  assets: Array<AssetsByLiquidity>
+  isRequesting?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  portfolios: () => [] as Array<Portfolio>,
+  isRequesting: true,
 })
 </script>
 
 <template>
-  <div class="dashboard-portfolios">
-    <div class="dashboard-portfolios-header">
-      <div class="dashboard-portfolios__title">Portfolios</div>
-      <div class="dashboard-portfolios__link">See All</div>
+  <div class="assets-liquidity">
+    <div class="assets-liquidity-header">
+      <div class="assets-liquidity__title">Assets By Liquidity</div>
     </div>
-    <div class="dashboard-portfolios__list">
+    <div class="assets-liquidity__list">
       <div 
-        v-for="portfolio in portfolios"
-        :key="portfolio.id"
-        class="dashboard-portfolios__item"
+        v-for="(asset, index) in assets"
+        :key="index"
+        class="assets-liquidity__item"
       >
-        <div class="dashboard-portfolios__item-title">
-          {{ portfolio.name }}
+        <div class="assets-liquidity__item-title">
+          {{ StringHelper.liquidityLabel(asset.liquidity_days) }}
         </div>
-        <div class="dashboard-portfolios__item-value">
-          {{ StringHelper.formatCurrencyBR(portfolio.balance) }}
+        <div class="assets-liquidity__item-value">
+          {{ StringHelper.formatCurrencyBR(asset.total_value) }}
         </div>
       </div>
     </div>
@@ -35,34 +37,34 @@ const props = withDefaults(defineProps<Props>(), {
 </template>
 
 <style scoped lang="scss">
-.dashboard-portfolios {
+.assets-liquidity {
   display: flex;
   flex-direction: column;
-  width: 27%;
   padding: 16px;
   align-items: flex-start;
   flex-shrink: 0;
   gap: 24px;
+  height: 100%;
 
   border-radius: 14px;
   background: var(--color-background);
-  .dashboard-portfolios-header {
+  .assets-liquidity-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     padding-bottom: 24px;
     border-bottom: 1px solid var(--color-border-menu-transparent);
-    .dashboard-portfolios__title {
+    .assets-liquidity__title {
       color: var(--color-text);
       font-feature-settings: 'clig' off, 'liga' off;
       font-size: 20px;
       font-style: normal;
-      font-weight: 700;
+      font-weight: 600;
       line-height: normal;
       letter-spacing: -1px;
     }
-    .dashboard-portfolios__link {
+    .assets-liquidity__link {
       color: var(--color-text-link);
       font-size: 16px;
       font-style: normal;
@@ -70,12 +72,12 @@ const props = withDefaults(defineProps<Props>(), {
       line-height: 24px;
     }
   }
-  .dashboard-portfolios__list {
+  .assets-liquidity__list {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 24px;
-    .dashboard-portfolios__item {
+    .assets-liquidity__item {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -83,14 +85,15 @@ const props = withDefaults(defineProps<Props>(), {
       padding: 16px;
       border-radius: 14px;
       background: var(--color-background-soft);
-      .dashboard-portfolios__item-title {
+      .assets-liquidity__item-title {
         color: var(--color-text);
         font-size: 16px;
         font-style: normal;
         font-weight: 500;
         line-height: 24px;
+        font-family: Plus Jakarta Sans;
       }
-      .dashboard-portfolios__item-value {
+      .assets-liquidity__item-value {
         color: var(--color-text);
         font-size: 16px;
         font-style: normal;

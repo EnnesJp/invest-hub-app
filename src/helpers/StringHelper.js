@@ -5,4 +5,12 @@ export default class StringHelper {
       currency: 'BRL',
     }).format(parseFloat(value))
   }
+
+  static formatDateBR(value) {
+    return new Intl.DateTimeFormat('pt-BR').format(new Date(value))
+  }
+
+  static liquidityLabel(value) {
+    return `D +${value}`
+  }
 }
