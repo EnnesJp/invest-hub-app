@@ -63,7 +63,6 @@ const props = withDefaults(defineProps<Props>(), {
   transition: opacity 0.3s ease;
   .modal-container {
     margin: auto;
-    padding: 20px 30px;
     background-color: #fff;
     border-radius: 2px;
     transition: all 0.3s ease;
@@ -73,6 +72,8 @@ const props = withDefaults(defineProps<Props>(), {
       display: flex;
       flex-direction: row;
       gap: 16px;
+      padding: 20px 30px;
+      border-bottom: 1px solid #E4E7EC;
       .modal-header__icon {
         display: flex;
         width: 48px;
@@ -119,7 +120,7 @@ const props = withDefaults(defineProps<Props>(), {
     }
     
     .modal-body {
-      margin: 20px 0;
+      padding: 20px 30px;
     }
   }
 }

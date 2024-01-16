@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import IconDots from '@/components/icons/IconDots.vue';
 import TransactionTotals from '@/components/transactions/TransactionTotals.vue';
+import TransactionForm from '@/components/transactions/TransactionForm.vue';
 import Modal from '@/components/base/Modal.vue';
 import StringHelper from '@/helpers/StringHelper';
 import type { Transaction } from '@/types/TransactionsHelper';
@@ -105,8 +106,8 @@ const showModal = ref(false)
     iconBorder
     @close="showModal = false"
   >
-    <template #header>
-      <h3>custom header</h3>
+    <template #body>
+      <TransactionForm />
     </template>
   </Modal>
 </template>
