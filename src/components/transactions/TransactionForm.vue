@@ -39,6 +39,7 @@ const form = ref({
     <SelectInput
       v-model="form.type"
       label="Type"
+      placeholder="Select a type"
       :options="[
         { label: 'Credit', value: 'credit' },
         { label: 'Debit', value: 'debit' },
