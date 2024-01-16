@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Chart from 'chart.js/auto'
+import StringHelper from '@/helpers/StringHelper'
 import chartsService from '@/api/modules/charts'
 import { onMounted, ref } from 'vue'
 
@@ -31,7 +32,7 @@ onMounted(() => {
         datasets: [{
           data: values.value,
           fill: false,
-          borderColor: '#4745A4',
+          borderColor: '#3BBB6E ',
           tension: 0.1
         }]
       };
@@ -47,7 +48,7 @@ onMounted(() => {
             tooltip: {
               callbacks: {
                 label: function (context: any) {
-                  return 'R$ ' + context.parsed.y
+                  return StringHelper.formatCurrencyBR(context.parsed.y)
                 }
               },
               bodyFont: fontConfig,
