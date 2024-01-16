@@ -1,37 +1,56 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-const props = defineProps({
-  show: Boolean
+import IconClose from '@/components/icons/modal/IconClose.vue';
+import IconSelector from '@/components/icons/modal/IconSelector.vue';
+
+interface Props {
+  show?: boolean
+  title: string
+  subtitle?: string
+  width?: string
+  icon?: string
+  iconBorder?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  show: false,
+  width: '300px',
+  icon: 'success',
+  iconBorder: false,
 })
 </script>
 
 <template>
   <Transition name="modal">
     <div v-if="show" class="modal-mask">
-      <div class="modal-container">
+      <div
+        class="modal-container"
+        :style="{ width }"
+      >
         <div class="modal-header">
-          <slot name="header">default header</slot>
+          <IconSelector
+            class="modal-header__icon"
+            :class="{ 'modal-header__icon--border': iconBorder }"
+            :icon="icon"
+          />
+          <div class="modal-header-wrapper">
+            <div class="modal-header-info">
+              <span class="modal-header__title">{{ title }}</span>
+              <span class="modal-header__subtitle" v-if="subtitle">{{ subtitle }}</span>
+            </div>
+            <IconClose class="modal-header__close-button" @click="$emit('close')" />
+          </div>
         </div>
 
         <div class="modal-body">
-          <slot name="body">default body</slot>
-        </div>
-
-        <div class="modal-footer">
-          <slot name="footer">
-            default footer
-            <button
-              class="modal-default-button"
-              @click="$emit('close')"
-            >OK</button>
-          </slot>
+          <slot name="body" />
         </div>
       </div>
     </div>
   </Transition>
 </template>
 
-<style>
+<style scoped lang="scss">
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -42,42 +61,69 @@ const props = defineProps({
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   transition: opacity 0.3s ease;
+  .modal-container {
+    margin: auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 0px 8px 8px -4px rgba(16, 24, 40, 0.04), 0px 20px 24px -4px rgba(16, 24, 40, 0.10);
+    .modal-header {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      .modal-header__icon {
+        display: flex;
+        width: 48px;
+        height: 48px;
+        padding: 12px;
+        justify-content: center;
+        align-items: center;
+        &.modal-header__icon--border {
+          border-radius: 10px;
+          border: 1px solid var(--Gray-200, #E4E7EC);
+          background: var(--Base-White, #FFF);
+
+          /* Shadow / xs */
+          box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+        }
+      }
+      .modal-header-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        .modal-header-info {
+          display: flex;
+          flex-direction: column;
+          .modal-header__title {
+            color: var(--color-text);
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 28px;
+          }
+          .modal-header__subtitle {
+            color: var(--color-text-soft);
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+          }
+        }
+        .modal-header__close-button {
+          cursor: pointer;
+        }
+      }
+    }
+    
+    .modal-body {
+      margin: 20px 0;
+    }
+  }
 }
 
-.modal-container {
-  width: 300px;
-  margin: auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
-}
 
-.modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
-}
 
-.modal-body {
-  margin: 20px 0;
-}
-
-.modal-default-button {
-  float: right;
-}
-
-.modal-enter-from {
-  opacity: 0;
-}
-
-.modal-leave-to {
-  opacity: 0;
-}
-
-.modal-enter-from .modal-container,
-.modal-leave-to .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
 </style>

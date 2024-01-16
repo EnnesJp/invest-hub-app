@@ -98,6 +98,11 @@ const showModal = ref(false)
   </div>
   <Modal
     :show="showModal"
+    title="New Transaction"
+    subtitle="Fill in the information below to create a new transaction"
+    width="600px"
+    icon="card"
+    iconBorder
     @close="showModal = false"
   >
     <template #header>
@@ -144,7 +149,7 @@ const showModal = ref(false)
         align-items: center;
         gap: 8px;
         border: none;
-
+        cursor: pointer;
         border-radius: 8px;
         background: var(--color-background-button);
 
