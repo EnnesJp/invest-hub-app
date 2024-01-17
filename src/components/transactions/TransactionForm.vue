@@ -2,15 +2,38 @@
 import BaseInput from '@/components/base/BaseInput.vue'
 import CurrencyInput from '@/components/base/CurrencyInput.vue'
 import SelectInput from '@/components/base/SelectInput.vue';
-import { ref } from 'vue'
+import assetsService from '@/api/modules/assets';
+import { ref, onMounted } from 'vue'
 
+const { selectData } = assetsService()
 const form = ref({
   description: '',
   value: '',
   date: '',
   type: '',
+  asset_id: '',
 })
 
+const isRequesting = ref(true)
+const typeOptions = ref([
+  { label: 'Credit', value: 'credit' },
+  { label: 'Debit', value: 'debit' },
+])
+const assetOptions = ref([])
+
+onMounted(() => {
+  selectData()
+    .then((response: any) => {
+      debugger
+      assetOptions.value = response.content.data
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
+    .finally(() => {
+      isRequesting.value = false
+    })
+})
 </script>
 
 <template>
@@ -20,30 +43,38 @@ const form = ref({
       placeholder="Description"
       label="Description"
     />
+
     <div class="transaction-form__value">
       <span class="transaction-form_value--label">
         Value
       </span>
+
       <CurrencyInput
         v-model="form.value"
         placeholder="Value"
         :options="{ currency: 'BRL' }"
       />
     </div>
+
     <BaseInput
       v-model="form.date"
       label="Date"
       placeholder="Date"
       type="date"
     />
+
     <SelectInput
       v-model="form.type"
       label="Type"
       placeholder="Select a type"
-      :options="[
-        { label: 'Credit', value: 'credit' },
-        { label: 'Debit', value: 'debit' },
-      ]"
+      :options="typeOptions"
+    />
+
+    <SelectInput
+      v-model="form.asset_id"
+      label="Asset"
+      placeholder="Select an asset"
+      :options="assetOptions"
     />
 
     <div class="transaction-form-buttons">

@@ -137,6 +137,21 @@ function selectOption(option: SelectOption) {
     position: absolute;
     top: 48px;
     width: 78%;
+    max-height: 300px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background: var(--color-background-scrollbar-track);
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-background-scrollbar-thumb);
+      border-radius: 4px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--color-background-scrollbar-thumb-hover);
+    }
     .input-option {
       color: var(--color-text);
       font-size: 16px;
