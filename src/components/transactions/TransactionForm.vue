@@ -45,6 +45,11 @@ const form = ref({
         { label: 'Debit', value: 'debit' },
       ]"
     />
+
+    <div class="transaction-form-buttons">
+      <button class="btn btn--secondary">Cancel</button>
+      <button class="btn btn--primary">Save</button>
+    </div>
   </div>
 </template>
 
@@ -66,6 +71,49 @@ const form = ref({
       font-weight: 500;
       line-height: 20px;
       width: 20%;
+    }
+  }
+  .transaction-form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    width: 100%;
+    padding-top: 32px;
+    .btn {
+      width: 100%;
+      display: flex;
+      height: 40px;
+      padding: 8px 16px;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+
+      text-align: center;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      font-family: 'Raleway', sans-serif;
+      &.btn--secondary {
+        background-color: var(--color-background-button-secondary);
+        color: var(--color-text);
+        border: 1px solid var(--color-background-button);
+        font-weight: 500;
+        &:hover {
+          background-color: var(--color-background-button);
+          color: var(--color-text-light);
+        }
+      }
+      &.btn--primary {
+        background-color: var(--color-background-button);
+        color: var(--color-text-light);
+        &:hover {
+          background-color: var(--color-background-button-focus);
+        }
+      }
     }
   }
 }
