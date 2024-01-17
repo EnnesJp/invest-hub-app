@@ -107,7 +107,9 @@ const showModal = ref(false)
     @close="showModal = false"
   >
     <template #body>
-      <TransactionForm />
+      <TransactionForm 
+        @close="showModal = false"
+      />
     </template>
   </Modal>
 </template>

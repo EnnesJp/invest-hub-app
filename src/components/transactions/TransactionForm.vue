@@ -77,8 +77,17 @@ onMounted(() => {
     />
 
     <div class="transaction-form-buttons">
-      <button class="btn btn--secondary">Cancel</button>
-      <button class="btn btn--primary">Save</button>
+      <button
+        class="btn btn--secondary"
+        @click="$emit('close')"
+      >
+        Cancel
+      </button>
+      <button
+        class="btn btn--primary"
+      >
+        Save
+      </button>
     </div>
   </div>
 </template>
