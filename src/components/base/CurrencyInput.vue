@@ -5,6 +5,7 @@ import { useCurrencyInput } from 'vue-currency-input'
 interface Props {
   modelValue: string,
   options: CurrencyInputOptions,
+  placeholder?: string,
 }
 const props = defineProps<Props>()
 
@@ -17,6 +18,7 @@ const { inputRef } = useCurrencyInput(props.options)
       ref="inputRef"
       class="input"
       type="text"
+      :placeholder="placeholder"
     />
   </div>
 </template>

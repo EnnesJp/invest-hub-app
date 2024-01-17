@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import IconDots from '@/components/icons/IconDots.vue';
+import Modal from '@/components/base/Modal.vue';
+import AssetForm from '@/components/assets/AssetForm.vue';
 import StringHelper from '@/helpers/StringHelper';
 import type { Asset } from '@/types/AssetsHelper';
+import { ref } from 'vue';
 
 interface Props {
   assets?: Array<Asset>
@@ -12,6 +15,8 @@ const props = withDefaults(defineProps<Props>(), {
   assets: () => [] as Array<Asset>,
   isRequesting: true,
 })
+
+const showModal = ref(false)
 </script>
 
 <template>
@@ -19,7 +24,12 @@ const props = withDefaults(defineProps<Props>(), {
     <div class="assets-table-header">
       <div class="assets-table-header-top">
         <h1 class="assets-table-header-top__title">Wallet</h1>
-        <button class="assets-table-header-top__btn">New Asset</button>
+        <button
+          class="assets-table-header-top__btn"
+          @click="showModal = true"
+        >
+          New Asset
+        </button>
       </div>
       <div class="assets-table-header-bottom">
         <span class="assets-table-header-bottom__title">summary</span>
@@ -87,6 +97,21 @@ const props = withDefaults(defineProps<Props>(), {
       </div>
     </div>
   </div>
+  <Modal
+    :show="showModal"
+    title="New Asset"
+    subtitle="Fill in the information below to create a new asset"
+    width="600px"
+    icon="coin"
+    iconBorder
+    @close="showModal = false"
+  >
+    <template #body>
+      <AssetForm 
+        @close="showModal = false"
+      />
+    </template>
+  </Modal>
 </template>
 
 <style scoped lang="scss">
@@ -127,7 +152,7 @@ const props = withDefaults(defineProps<Props>(), {
         align-items: center;
         gap: 8px;
         border: none;
-
+        cursor: pointer;
         border-radius: 8px;
         background: var(--color-background-button);
 

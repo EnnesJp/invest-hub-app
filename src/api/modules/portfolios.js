@@ -13,7 +13,17 @@ export default function portfolioService() {
     }
   }
 
+  const selectData = async () => {
+    try {
+      const response = await get(`${_apiBase}/select`, true)
+      return response
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return {
-    list
+    list,
+    selectData
   }
 }
