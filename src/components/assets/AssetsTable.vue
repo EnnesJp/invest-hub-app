@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<Props>(), {
   <div class="assets-table">
     <div class="assets-table-header">
       <div class="assets-table-header-top">
-        <h1 class="assets-table-header-top__title">Assets</h1>
+        <h1 class="assets-table-header-top__title">Wallet</h1>
         <button class="assets-table-header-top__btn">New Asset</button>
       </div>
       <div class="assets-table-header-bottom">

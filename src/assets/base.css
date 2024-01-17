@@ -40,11 +40,14 @@
 :root {
   --color-background: var(--vt-c-white);
   --color-background-disabled: var(--vt-c-grey);
+  --color-background-select-input-hover: var(--vt-c-grey);
   --color-background-soft: var(--vt-c-white-soft-5);
   --color-background-guess: var(--vt-c-black-transparent);
   --color-background-menu: var(--vt-c-white);
   --color-background-dashboard-focus: var(--vt-c-blue-light);
   --color-background-button: var(--vt-c-blue-lighter);
+  --color-background-button-focus: var(--vt-c-blue-light);
+  --color-background-button-secondary: var(--vt-c-white);
   --color-background-primary: var(--vt-c-yellow-dark);
   --color-background-primary-light: var(--vt-c-yellow-light);
   --color-background-scrollbar-track: var(--vt-c-white-soft-1);

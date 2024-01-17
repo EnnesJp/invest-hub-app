@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import IconDots from '@/components/icons/IconDots.vue';
 import TransactionTotals from '@/components/transactions/TransactionTotals.vue';
+import TransactionForm from '@/components/transactions/TransactionForm.vue';
+import Modal from '@/components/base/Modal.vue';
 import StringHelper from '@/helpers/StringHelper';
 import type { Transaction } from '@/types/TransactionsHelper';
+import { ref } from 'vue';
 
 interface Props {
   transactions?: Array<Transaction>
@@ -19,6 +22,8 @@ const props = withDefaults(defineProps<Props>(), {
   totalCredit: 'R$ 0,00',
   totalDebit: 'R$ 0,00',
 })
+
+const showModal = ref(false)
 </script>
 
 <template>
@@ -26,7 +31,12 @@ const props = withDefaults(defineProps<Props>(), {
     <div class="transactions-table-header">
       <div class="transactions-table-header-top">
         <h1 class="transactions-table-header-top__title">Transaction</h1>
-        <button class="transactions-table-header-top__btn">New Transaction</button>
+        <button
+          class="transactions-table-header-top__btn"
+          @click="showModal = true"
+        >
+          New Transaction
+        </button>
       </div>
       <div class="transactions-table-header-bottom">
         <span class="transactions-table-header-bottom__title">summary</span>
@@ -87,6 +97,19 @@ const props = withDefaults(defineProps<Props>(), {
       </div>
     </div>
   </div>
+  <Modal
+    :show="showModal"
+    title="New Transaction"
+    subtitle="Fill in the information below to create a new transaction"
+    width="600px"
+    icon="card"
+    iconBorder
+    @close="showModal = false"
+  >
+    <template #body>
+      <TransactionForm />
+    </template>
+  </Modal>
 </template>
 
 <style scoped lang="scss">
@@ -127,7 +150,7 @@ const props = withDefaults(defineProps<Props>(), {
         align-items: center;
         gap: 8px;
         border: none;
-
+        cursor: pointer;
         border-radius: 8px;
         background: var(--color-background-button);
 
