@@ -13,16 +13,24 @@
   --vt-c-grey-5: #555;
   --vt-c-grey-8: #888;
   --vt-c-grey-70: rgba(222, 222, 222, 0.70);
+  --vt-c-grey-300: #D0D5DD;
+
 
   --vt-c-black: #181818;
   --vt-c-black-transparent: rgba(0, 0, 0, 0.4);
+  --vt-c-black-transparent-2: rgba(0, 0, 0, 0.5);
   --vt-c-black-shadow: rgba(0, 0, 0, 0.1);
+  --vt-c-black-shadow-2: rgba(16, 24, 40, 0.04);
+  --vt-c-black-shadow-3: rgba(16, 24, 40, 0.10);
+  --vt-c-black-shadow-4: rgba(16, 24, 40, 0.05);;
 
   --vt-c-blue-dark: #0d163a;
   --vt-c-blue-dark-20: #0D163A33;
   --vt-c-blue-dark-transparent: #0D163A1a;
   --vt-c-blue-light: #4745A4;
   --vt-c-blue-lighter: #606CCB;
+  --vt-c-blue-grey: #E4E7EC;
+  --vt-c-blue-grey-2: #667085;
 
   --vt-c-yellow-dark: #b28d2d;
   --vt-c-yellow: #F9BA33;
@@ -73,6 +81,7 @@
   --color-text-progress-first: var(--vt-c-blue-light);
   --color-text-progress-second: var(--vt-c-yellow);
   --color-text-progress-third: var(--vt-c-green-light);
+  --color-text-input: var(--vt-c-blue-grey-2);
 
   --color-border-guess: var(--vt-c-white);
   --color-border-menu: var(--vt-c-blue-light);
@@ -81,8 +90,15 @@
   --color-border-dashboard-dark: var(--vt-c-blue-dark-20);
   --color-border-dashboard-item: var(--vt-c-white-20);
   --color-border-table: var(--vt-c-grey-2);
+  --color-border-modal: var(--vt-c-blue-grey);
+  --color-border-input: var(--vt-c-grey-300);
 
   --color-shadow: var(--vt-c-black-shadow);
+  --color-modal-shadow: var(--vt-c-black-shadow-2);
+  --color-modal-shadow-2: var(--vt-c-black-shadow-3);
+  --color-modal-shadow-4: var(--vt-c-black-shadow-4);
+
+  --color-modal-mask: var(--vt-c-black-transparent-2);
 }
 
 /* @media (prefers-color-scheme: dark) {

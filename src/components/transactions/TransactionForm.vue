@@ -24,7 +24,6 @@ const assetOptions = ref([])
 onMounted(() => {
   selectData()
     .then((response: any) => {
-      debugger
       assetOptions.value = response.content.data
     })
     .catch((error: any) => {

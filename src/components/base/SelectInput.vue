@@ -91,9 +91,9 @@ function selectOption(option: SelectOption) {
       gap: 8px;
     
       border-radius: 8px;
-      border: 1px solid var(--Gray-300, #D0D5DD);
-      background: var(--Base-White, #FFF);
-      box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+      border: 1px solid var(--color-border-input);
+      background: var(--color-background);
+      box-shadow: 0px 1px 2px 0px var(--color-modal-shadow-4);
       .input-icon {
         transition: 0.5s;
         &.input-icon--active {
@@ -103,7 +103,7 @@ function selectOption(option: SelectOption) {
       .input {
         width: 100%;
         flex: 1 0 0;
-        color: #667085;
+        color: var(--color-text-input);
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -131,14 +131,15 @@ function selectOption(option: SelectOption) {
     flex-direction: column;
     align-self: stretch;
     border-radius: 8px;
-    border: 1px solid var(--Gray-300, #D0D5DD);
-    background: var(--Base-White, #FFF);
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    border: 1px solid var(--color-border-table);
+    background: var(--color-background);
+    box-shadow: 0px 1px 2px 0px var(--color-modal-shadow-4);
     position: absolute;
     top: 48px;
     width: 78%;
     max-height: 300px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    z-index: 2;
     &::-webkit-scrollbar {
       width: 5px;
     }
