@@ -54,14 +54,14 @@ defineEmits(['update:modelValue'])
     width: 80%;
   
     border-radius: 8px;
-    border: 1px solid var(--Gray-300, #D0D5DD);
-    background: var(--Base-White, #FFF);
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    border: 1px solid var(--color-border-input);
+    background: var(--color-background);
+    box-shadow: 0px 1px 2px 0px var(--color-modal-shadow-4);
   
     .input {
       width: 100%;
       flex: 1 0 0;
-      color: #667085;
+      color: var(--color-text-input);;
       font-size: 16px;
       font-style: normal;
       font-weight: 400;

@@ -58,22 +58,22 @@ const props = withDefaults(defineProps<Props>(), {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--color-modal-mask);
   display: flex;
   transition: opacity 0.3s ease;
   .modal-container {
     margin: auto;
-    background-color: #fff;
+    background-color: var(--color-background);
     border-radius: 2px;
     transition: all 0.3s ease;
     border-radius: 12px;
-    box-shadow: 0px 8px 8px -4px rgba(16, 24, 40, 0.04), 0px 20px 24px -4px rgba(16, 24, 40, 0.10);
+    box-shadow: 0px 8px 8px -4px var(--color-modal-shadow), 0px 20px 24px -4px var(--color-modal-shadow-2);
     .modal-header {
       display: flex;
       flex-direction: row;
       gap: 16px;
       padding: 20px 30px;
-      border-bottom: 1px solid #E4E7EC;
+      border-bottom: 1px solid var(--color-border-modal);
       .modal-header__icon {
         display: flex;
         width: 48px;
@@ -83,11 +83,9 @@ const props = withDefaults(defineProps<Props>(), {
         align-items: center;
         &.modal-header__icon--border {
           border-radius: 10px;
-          border: 1px solid var(--Gray-200, #E4E7EC);
-          background: var(--Base-White, #FFF);
-
-          /* Shadow / xs */
-          box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+          border: 1px solid var(--color-border-modal);
+          background: var(--color-background);
+          box-shadow: 0px 1px 2px 0px var(--color-modal-shadow-4);
         }
       }
       .modal-header-wrapper {
