@@ -1,12 +1,21 @@
 import Request from '@/api/Request'
 
 export default function assetsService() {
-  const { get } = Request()
+  const { get, post } = Request()
   const _apiBase = 'assets'
 
   const list = async () => {
     try {
       const response = await get(`${_apiBase}`, true)
+      return response
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const create = async (data) => {
+    try {
+      const response = await post(`${_apiBase}`, data, true)
       return response
     } catch (error) {
       console.error(error)
@@ -24,6 +33,7 @@ export default function assetsService() {
 
   return {
     list,
-    selectData
+    selectData,
+    create
   }
 }

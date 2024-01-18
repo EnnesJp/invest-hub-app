@@ -31,7 +31,8 @@ function setList() {
   assetsByLiquidity.value.sort((a, b) => a.liquidity_days - b.liquidity_days)
 }
 
-onMounted(() => {
+const getAssetsData = () => {
+  isRequesting.value = true
   list()
     .then((response: any) => {
       assets.value = response.content.data.filter((transaction: any) => transaction.value != 0)
@@ -40,6 +41,10 @@ onMounted(() => {
     .finally(() => {
       isRequesting.value = false
     })
+}
+
+onMounted(() => {
+  getAssetsData()
 })
 </script>
 
@@ -50,6 +55,7 @@ onMounted(() => {
         <AssetsTable
           :assets="assets"
           :isRequesting="isRequesting"
+          @updateAssets="getAssetsData"
         />
       </div>
       <div class="wallet-right">

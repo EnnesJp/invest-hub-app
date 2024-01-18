@@ -4,8 +4,11 @@ import CurrencyInput from '@/components/base/CurrencyInput.vue'
 import SelectInput from '@/components/base/SelectInput.vue';
 import savingPlanService from '@/api/modules/savingPlans';
 import portfolioService from '@/api/modules/portfolios';
+import assetsService from '@/api/modules/assets';
+import { useAuthStore } from '@/stores/auth';
 import { ref, onBeforeMount } from 'vue'
 
+const authStore = useAuthStore();
 const form = ref({
   name: '',
   value: '',
@@ -15,13 +18,26 @@ const form = ref({
   liquidity_date: '',
   income_tax: '',
   portfolio_id: '',
-  saving_plan_id: ''
+  saving_plan_id: '',
+  user_id: authStore.user?.id
 })
 
 const isRequestingSavingPlan = ref(true)
 const isRequestingPortfolio = ref(true)
 const portfolioOptions = ref([])
 const savingPlanOptions = ref([])
+const emit = defineEmits(['close', 'updateAssets'])
+
+function saveAsset() {
+  assetsService().create(form.value)
+    .then((response: any) => {
+      emit('updateAssets')
+      emit('close')
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
+}
 
 onBeforeMount(() => {
   savingPlanService().selectData()
@@ -131,6 +147,7 @@ onBeforeMount(() => {
       </button>
       <button
         class="btn btn--primary"
+        @click="saveAsset"
       >
         Save
       </button>
