@@ -1,7 +1,7 @@
 import Request from '@/api/Request'
 
 export default function transactionService() {
-  const { get } = Request()
+  const { get, post } = Request()
   const _apiBase = 'transactions'
 
   const list = async () => {
@@ -13,7 +13,17 @@ export default function transactionService() {
     }
   }
 
+  const create = async (data) => {
+    try {
+      const response = await post(`${_apiBase}`, data, true)
+      return response
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return {
-    list
+    list,
+    create
   }
 }

@@ -109,6 +109,7 @@ const showModal = ref(false)
     <template #body>
       <TransactionForm 
         @close="showModal = false"
+        @updateTransactions="$emit('updateTransactions')"
       />
     </template>
   </Modal>
@@ -233,7 +234,7 @@ const showModal = ref(false)
     align-self: stretch;
     border-radius: 8px;
     background-color: var(--color-background);
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 520px;
 
     &::-webkit-scrollbar {
