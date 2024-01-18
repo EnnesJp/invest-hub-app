@@ -32,6 +32,15 @@ function selectMenu() {
   currentLink?.classList.add('selected');
 };
 
+function getNameInitials(name: string) {
+  const names = name.split(' ')
+  let initials = names[0][0]
+
+  if (names.length > 1) initials += names[names.length - 1][0]
+  
+  return initials.toUpperCase()
+};
+
 onMounted(() => {
   selectMenu();
 });
@@ -97,7 +106,9 @@ onMounted(() => {
                 <div class="top-bar__right">
                     <div class="top-bar__right__user">
                         <div class="top-bar__right__user__avatar">
-                            <img src="https://i.pravatar.cc/150?img=68" alt="avatar" />
+                            <span>
+                                {{ getNameInitials(authStore.user?.name || '') }}
+                            </span>
                         </div>
                         <div class="top-bar__right__user__name">{{ authStore.user?.name }}</div>
                     </div>
@@ -233,14 +244,17 @@ onMounted(() => {
                     align-items: center;
                     gap: 10px;
                     .top-bar__right__user__avatar {
-                        width: 32px;
-                        height: 32px;
-                        border-radius: 50%;
-                        overflow: hidden;
-                        img {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 100px;
+                        background-color: var(--color-background-soft);
+                        span {
+                            font-size: 14px;
+                            color: var(--color-text);
+                            font-weight: 600;
                         }
                     }
                     .top-bar__right__user__name {
