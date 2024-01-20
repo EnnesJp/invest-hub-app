@@ -19,8 +19,10 @@ onMounted(() => {
   totalPerMonth()
     .then((response: any) => {
       response.content.data.forEach((item: any) => {
-        labels.value.push(item.month)
-        values.value.push(item.total)
+        if (!labels.value.includes(item.month)) {
+          labels.value.push(item.month)
+          values.value.push(item.total)
+        }
       })
     })
     .catch((error: any) => {
