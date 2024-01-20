@@ -91,7 +91,7 @@ const showModal = ref(false)
               {{ StringHelper.formatCurrencyBR(transaction.value) }}
           </span>
           <span class="transactions-table-body__content-item-title end">
-            <IconDots />
+            <IconDots class="action-button"/>
           </span>
         </div>
       </div>
@@ -277,6 +277,14 @@ const showModal = ref(false)
         &.number {
           font-weight: bold;
           font-family: Plus Jakarta Sans;
+        }
+        .action-button {
+          width: 24px;
+          border-radius: 8px;
+          &:hover {
+            cursor: pointer;
+            border: 1px solid var(--color-border-table-hover);
+          }
         }
         .transactions-table-body__content-item-title-badge {
           display: flex;
