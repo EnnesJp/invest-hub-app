@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import IconDots from '@/components/icons/IconDots.vue';
 import TransactionTotals from '@/components/transactions/TransactionTotals.vue';
 import TransactionForm from '@/components/transactions/TransactionForm.vue';
 import Modal from '@/components/base/Modal.vue';
