@@ -49,6 +49,7 @@
   --color-background: var(--vt-c-white);
   --color-background-disabled: var(--vt-c-grey);
   --color-background-select-input-hover: var(--vt-c-grey);
+  --color-background-button-hover: var(--vt-c-grey);
   --color-background-soft: var(--vt-c-white-soft-5);
   --color-background-guess: var(--vt-c-black-transparent);
   --color-background-menu: var(--vt-c-white);
