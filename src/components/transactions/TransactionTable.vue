@@ -25,14 +25,20 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const showModal = ref(false)
-const { edit, deleteTransaction } = transactionService()
+const { deleteTransaction } = transactionService()
 const emit = defineEmits(['updateTransactions'])
+const isEditing = ref(false)
+const transactionData = ref({} as Transaction)
 
-function editTransaction(id: string) {
-  edit(id)
-    .then((response: any) => {
-      emit('updateTransactions')
-    })
+function close() {
+  showModal.value = false
+  isEditing.value = false
+}
+
+function editTransaction(transaction: Transaction) {
+  isEditing.value = true
+  showModal.value = true
+  transactionData.value = transaction
 }
 
 function deleteTransactionById(id: string) {
@@ -109,32 +115,33 @@ function deleteTransactionById(id: string) {
           </span>
           <span class="transactions-table-body__content-item-title end">
             <ActionTableButton
-              :id="transaction.id"
+              :transaction="transaction"
               @edit="editTransaction"
               @delete="deleteTransactionById"
             />
           </span>
-          <Modal
-            :show="showModal"
-            title="New Transaction"
-            subtitle="Fill in the information below to create a new transaction"
-            width="600px"
-            icon="card"
-            iconBorder
-            @close="showModal = false"
-          >
-            <template #body>
-              <TransactionForm
-                :transaction="transaction"
-                @close="showModal = false"
-                @updateTransactions="emit('updateTransactions')"
-              />
-            </template>
-          </Modal>
         </div>
       </div>
     </div>
   </div>
+  <Modal
+    :show="showModal"
+    title="New Transaction"
+    subtitle="Fill in the information below to create a new transaction"
+    width="600px"
+    icon="card"
+    iconBorder
+    @close="close"
+  >
+    <template #body>
+      <TransactionForm
+        :transaction="transactionData"
+        :isEditing="isEditing"
+        @close="showModal = false"
+        @updateTransactions="emit('updateTransactions')"
+      />
+    </template>
+  </Modal>
 </template>
 
 <style scoped lang="scss">

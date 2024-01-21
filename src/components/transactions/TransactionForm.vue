@@ -10,22 +10,27 @@ import { ref, onMounted } from 'vue'
 
 interface Props {
   transaction: Transaction
+  isEditing: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   transaction: () => ({} as Transaction),
+  isEditing: false,
 })
 
 const authStore = useAuthStore();
 const { selectData } = assetsService()
 const form = ref({
-  description: props.transaction.description ?? '',
-  value: props.transaction.value ?? '',
-  date: props.transaction.date ?? '',
-  type: props.transaction.type ?? '',
-  asset_id: props.transaction.asset_id ?? '',
+  description: props.isEditing ? props.transaction.description : '',
+  value: props.isEditing ? props.transaction.value : '',
+  date: props.isEditing ? formatDate(props.transaction.date) : '',
+  type: props.isEditing ? props.transaction.type : '',
+  asset_id: props.isEditing ? props.transaction.asset_id : '',
   user_id: authStore.user?.id
 })
+
+console.log(props.transaction)
+console.log(form.value)
 
 const isRequesting = ref(true)
 const typeOptions = ref([
@@ -35,8 +40,36 @@ const typeOptions = ref([
 const assetOptions = ref([])
 const emit = defineEmits(['close', 'updateTransactions'])
 
+function formatDate(date: string) {
+  const dateArray = date.split('/')
+  const day = dateArray[0]
+  const month = dateArray[1]
+  const year = dateArray[2]
+  
+  return `${year}-${month}-${day}`
+}
+
+function btnAction() {
+  if (props.isEditing) {
+    editTransaction(props.transaction.id)
+  }
+
+  saveTransaction()
+}
+
 function saveTransaction() {
   transactionService().create(form.value)
+    .then((response: any) => {
+      emit('updateTransactions')
+      emit('close')
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
+}
+
+function editTransaction(id: string) {
+  transactionService().edit(id)
     .then((response: any) => {
       emit('updateTransactions')
       emit('close')
@@ -110,7 +143,7 @@ onMounted(() => {
       </button>
       <button
         class="btn btn--primary"
-        @click="saveTransaction"
+        @click="btnAction"
       >
         Save
       </button>

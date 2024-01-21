@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import IconDots from '@/components/icons/IconDots.vue';
+import type { Transaction } from '@/types/TransactionsHelper';
 import { ref } from 'vue';
 
 interface Props {
-  id: string,
+  transaction: Transaction,
 }
 
 const props = defineProps<Props>()
@@ -22,7 +23,7 @@ const emit = defineEmits(['edit', 'delete'])
   >
     <div
       class="action-button-dropdown__item"
-      @click="emit('edit', props.id)"
+      @click="emit('edit', props.transaction)"
     >
       <span class="action-button-dropdown__item-title">
         Edit
@@ -30,7 +31,7 @@ const emit = defineEmits(['edit', 'delete'])
     </div>
     <div
       class="action-button-dropdown__item"
-      @click="emit('delete', props.id)"
+      @click="emit('delete', props.transaction)"
     >
       <span class="action-button-dropdown__item-title">
         Delete
