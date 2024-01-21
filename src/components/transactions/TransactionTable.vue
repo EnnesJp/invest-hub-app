@@ -3,6 +3,7 @@ import IconDots from '@/components/icons/IconDots.vue';
 import TransactionTotals from '@/components/transactions/TransactionTotals.vue';
 import TransactionForm from '@/components/transactions/TransactionForm.vue';
 import Modal from '@/components/base/Modal.vue';
+import ActionTableButton from '@/components/base/ActionTableButton.vue';
 import StringHelper from '@/helpers/StringHelper';
 import type { Transaction } from '@/types/TransactionsHelper';
 import { ref } from 'vue';
@@ -23,17 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
   totalDebit: 'R$ 0,00',
 })
 
-type DropdownActionsRef = {
-  [key: string]: HTMLElement
-}
-
 const showModal = ref(false)
-const dropdownActionsRef = ref({} as DropdownActionsRef);
-
-function showDropdown(id: string) {
-  const dropdown = dropdownActionsRef.value[id]
-  dropdown.classList.toggle('show')
-}
 </script>
 
 <template>
@@ -101,21 +92,9 @@ function showDropdown(id: string) {
               {{ StringHelper.formatCurrencyBR(transaction.value) }}
           </span>
           <span class="transactions-table-body__content-item-title end">
-            <IconDots
-              class="action-button"
-              @click="showDropdown(transaction.id)"
+            <ActionTableButton
+              :id="transaction.id"
             />
-            <div
-              class="action-button-dropdown"
-              :ref="el => dropdownActionsRef[transaction.id] = el"
-            >
-              <div class="action-button-dropdown__item">
-                <span class="action-button-dropdown__item-title">Edit</span>
-              </div>
-              <div class="action-button-dropdown__item">
-                <span class="action-button-dropdown__item-title">Delete</span>
-              </div>
-            </div>
           </span>
         </div>
       </div>
@@ -302,54 +281,6 @@ function showDropdown(id: string) {
         &.number {
           font-weight: bold;
           font-family: Plus Jakarta Sans;
-        }
-        .action-button {
-          width: 24px;
-          border-radius: 8px;
-          &:hover {
-            cursor: pointer;
-            border: 1px solid var(--color-border-table-hover);
-          }
-        }
-        .action-button-dropdown {
-          position: absolute;
-          top: 20px;
-          right: 0;
-          display: none;
-          flex-direction: column;
-          justify-content: flex-start;
-          align-items: flex-start;
-          gap: 8px;
-          padding: 8px;
-          width: 120px;
-          background-color: var(--color-background);
-          border-radius: 8px;
-          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          z-index: 1;
-          &.show {
-            display: flex;
-          }
-          .action-button-dropdown__item {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 8px;
-            width: 100%;
-            padding: 8px;
-            border-radius: 8px;
-            &:hover {
-              background-color: var(--color-background-button-hover);
-              cursor: pointer;
-            }
-            .action-button-dropdown__item-title {
-              font-size: 12px;
-              font-style: normal;
-              font-weight: 400;
-              line-height: 20px;
-              font-family: 'Raleway', sans-serif;
-              color: var(--color-text);
-            }
-          }
         }
         .transactions-table-body__content-item-title-badge {
           display: flex;

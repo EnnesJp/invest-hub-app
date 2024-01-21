@@ -19,6 +19,7 @@
   --vt-c-black: #181818;
   --vt-c-black-transparent: rgba(0, 0, 0, 0.4);
   --vt-c-black-transparent-2: rgba(0, 0, 0, 0.5);
+  --vt-c-black-transparent-3: rgba(0, 0, 0, 0.25);
   --vt-c-black-shadow: rgba(0, 0, 0, 0.1);
   --vt-c-black-shadow-2: rgba(16, 24, 40, 0.04);
   --vt-c-black-shadow-3: rgba(16, 24, 40, 0.10);
@@ -95,6 +96,8 @@
   --color-border-input: var(--vt-c-grey-300);
 
   --color-shadow: var(--vt-c-black-shadow);
+  --color-shadow-dropdown: var(--vt-c-black-transparent-3);
+
   --color-modal-shadow: var(--vt-c-black-shadow-2);
   --color-modal-shadow-2: var(--vt-c-black-shadow-3);
   --color-modal-shadow-4: var(--vt-c-black-shadow-4);
