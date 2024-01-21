@@ -8,6 +8,7 @@ interface Props {
 
 const props = defineProps<Props>()
 const showDropdown = ref(false)
+const emit = defineEmits(['edit', 'delete'])
 </script>
 
 <template>
@@ -19,11 +20,21 @@ const showDropdown = ref(false)
     class="action-button-dropdown"
     v-if="showDropdown"
   >
-    <div class="action-button-dropdown__item">
-      <span class="action-button-dropdown__item-title">Edit</span>
+    <div
+      class="action-button-dropdown__item"
+      @click="emit('edit', props.id)"
+    >
+      <span class="action-button-dropdown__item-title">
+        Edit
+      </span>
     </div>
-    <div class="action-button-dropdown__item">
-      <span class="action-button-dropdown__item-title">Delete</span>
+    <div
+      class="action-button-dropdown__item"
+      @click="emit('delete', props.id)"
+    >
+      <span class="action-button-dropdown__item-title">
+        Delete
+      </span>
     </div>
   </div>
 </template>

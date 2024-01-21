@@ -3,6 +3,7 @@ import TransactionTotals from '@/components/transactions/TransactionTotals.vue';
 import TransactionForm from '@/components/transactions/TransactionForm.vue';
 import Modal from '@/components/base/Modal.vue';
 import ActionTableButton from '@/components/base/ActionTableButton.vue';
+import transactionService from '@/api/modules/transactions';
 import StringHelper from '@/helpers/StringHelper';
 import type { Transaction } from '@/types/TransactionsHelper';
 import { ref } from 'vue';
@@ -24,6 +25,22 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const showModal = ref(false)
+const { edit, deleteTransaction } = transactionService()
+const emit = defineEmits(['list'])
+
+function editTransaction(id: string) {
+  edit(id)
+    .then((response: any) => {
+      emit('list')
+    })
+}
+
+function deleteTransactionById(id: string) {
+  deleteTransaction(id)
+    .then((response: any) => {
+      emit('list')
+    })
+}
 </script>
 
 <template>
@@ -93,6 +110,8 @@ const showModal = ref(false)
           <span class="transactions-table-body__content-item-title end">
             <ActionTableButton
               :id="transaction.id"
+              @edit="editTransaction"
+              @delete="deleteTransactionById"
             />
           </span>
         </div>
