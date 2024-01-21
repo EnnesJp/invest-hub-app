@@ -5,16 +5,25 @@ import SelectInput from '@/components/base/SelectInput.vue';
 import assetsService from '@/api/modules/assets';
 import transactionService from '@/api/modules/transactions';
 import { useAuthStore } from '@/stores/auth';
+import type { Transaction } from '@/types/TransactionsHelper';
 import { ref, onMounted } from 'vue'
+
+interface Props {
+  transaction: Transaction
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  transaction: () => ({} as Transaction),
+})
 
 const authStore = useAuthStore();
 const { selectData } = assetsService()
 const form = ref({
-  description: '',
-  value: '',
-  date: '',
-  type: '',
-  asset_id: '',
+  description: props.transaction.description ?? '',
+  value: props.transaction.value ?? '',
+  date: props.transaction.date ?? '',
+  type: props.transaction.type ?? '',
+  asset_id: props.transaction.asset_id ?? '',
   user_id: authStore.user?.id
 })
 

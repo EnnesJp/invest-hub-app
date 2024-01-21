@@ -26,19 +26,19 @@ const props = withDefaults(defineProps<Props>(), {
 
 const showModal = ref(false)
 const { edit, deleteTransaction } = transactionService()
-const emit = defineEmits(['list'])
+const emit = defineEmits(['updateTransactions'])
 
 function editTransaction(id: string) {
   edit(id)
     .then((response: any) => {
-      emit('list')
+      emit('updateTransactions')
     })
 }
 
 function deleteTransactionById(id: string) {
   deleteTransaction(id)
     .then((response: any) => {
-      emit('list')
+      emit('updateTransactions')
     })
 }
 </script>
@@ -114,26 +114,27 @@ function deleteTransactionById(id: string) {
               @delete="deleteTransactionById"
             />
           </span>
+          <Modal
+            :show="showModal"
+            title="New Transaction"
+            subtitle="Fill in the information below to create a new transaction"
+            width="600px"
+            icon="card"
+            iconBorder
+            @close="showModal = false"
+          >
+            <template #body>
+              <TransactionForm
+                :transaction="transaction"
+                @close="showModal = false"
+                @updateTransactions="emit('updateTransactions')"
+              />
+            </template>
+          </Modal>
         </div>
       </div>
     </div>
   </div>
-  <Modal
-    :show="showModal"
-    title="New Transaction"
-    subtitle="Fill in the information below to create a new transaction"
-    width="600px"
-    icon="card"
-    iconBorder
-    @close="showModal = false"
-  >
-    <template #body>
-      <TransactionForm 
-        @close="showModal = false"
-        @updateTransactions="$emit('updateTransactions')"
-      />
-    </template>
-  </Modal>
 </template>
 
 <style scoped lang="scss">
