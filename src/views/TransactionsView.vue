@@ -12,7 +12,8 @@ const totalTransactions = ref('')
 const totalCredit = ref('')
 const totalDebit = ref('')
 
-onMounted(() => {
+function getTransactionsData() {
+  isRequesting.value = true
   list()
     .then((response: any) => {
       transactions.value = response.content.data.filter((transaction: any) => transaction.value != 0)
@@ -23,6 +24,10 @@ onMounted(() => {
     .finally(() => {
       isRequesting.value = false
     })
+}
+
+onMounted(() => {
+  getTransactionsData()
 })
 </script>
 
@@ -34,6 +39,7 @@ onMounted(() => {
       :totalTransactions="totalTransactions"
       :totalCredit="totalCredit"
       :totalDebit="totalDebit"
+      @updateTransactions="getTransactionsData"
     />
   </AuthenticatedLayout>
 </template>

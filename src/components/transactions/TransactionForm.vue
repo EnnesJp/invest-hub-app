@@ -3,8 +3,11 @@ import BaseInput from '@/components/base/BaseInput.vue'
 import CurrencyInput from '@/components/base/CurrencyInput.vue'
 import SelectInput from '@/components/base/SelectInput.vue';
 import assetsService from '@/api/modules/assets';
+import transactionService from '@/api/modules/transactions';
+import { useAuthStore } from '@/stores/auth';
 import { ref, onMounted } from 'vue'
 
+const authStore = useAuthStore();
 const { selectData } = assetsService()
 const form = ref({
   description: '',
@@ -12,6 +15,7 @@ const form = ref({
   date: '',
   type: '',
   asset_id: '',
+  user_id: authStore.user?.id
 })
 
 const isRequesting = ref(true)
@@ -20,6 +24,18 @@ const typeOptions = ref([
   { label: 'Debit', value: 'debit' },
 ])
 const assetOptions = ref([])
+const emit = defineEmits(['close', 'updateTransactions'])
+
+function saveTransaction() {
+  transactionService().create(form.value)
+    .then((response: any) => {
+      emit('updateTransactions')
+      emit('close')
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
+}
 
 onMounted(() => {
   selectData()
@@ -85,6 +101,7 @@ onMounted(() => {
       </button>
       <button
         class="btn btn--primary"
+        @click="saveTransaction"
       >
         Save
       </button>

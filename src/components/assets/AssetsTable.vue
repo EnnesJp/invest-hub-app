@@ -109,6 +109,7 @@ const showModal = ref(false)
     <template #body>
       <AssetForm 
         @close="showModal = false"
+        @updateAssets="$emit('updateAssets')"
       />
     </template>
   </Modal>

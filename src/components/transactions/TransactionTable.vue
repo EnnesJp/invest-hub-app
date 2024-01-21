@@ -109,6 +109,7 @@ const showModal = ref(false)
     <template #body>
       <TransactionForm 
         @close="showModal = false"
+        @updateTransactions="$emit('updateTransactions')"
       />
     </template>
   </Modal>
