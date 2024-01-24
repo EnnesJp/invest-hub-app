@@ -4,6 +4,7 @@ import CurrencyInput from '@/components/base/CurrencyInput.vue'
 import SelectInput from '@/components/base/SelectInput.vue';
 import assetsService from '@/api/modules/assets';
 import transactionService from '@/api/modules/transactions';
+import StringHelper from '@/helpers/StringHelper';
 import { useAuthStore } from '@/stores/auth';
 import type { Transaction } from '@/types/TransactionsHelper';
 import { ref, onMounted } from 'vue'
@@ -23,7 +24,7 @@ const { selectData } = assetsService()
 const form = ref({
   description: props.isEditing ? props.transaction.description : '',
   value: props.isEditing ? props.transaction.value : '',
-  date: props.isEditing ? formatDate(props.transaction.date) : '',
+  date: props.isEditing ? StringHelper.formatDate(props.transaction.date) : '',
   type: props.isEditing ? props.transaction.type : '',
   asset_id: props.isEditing ? props.transaction.asset_id : '',
   user_id: authStore.user?.id
@@ -39,15 +40,6 @@ const typeOptions = ref([
 ])
 const assetOptions = ref([])
 const emit = defineEmits(['close', 'updateTransactions'])
-
-function formatDate(date: string) {
-  const dateArray = date.split('/')
-  const day = dateArray[0]
-  const month = dateArray[1]
-  const year = dateArray[2]
-  
-  return `${year}-${month}-${day}`
-}
 
 function btnAction() {
   if (props.isEditing) {
