@@ -1,7 +1,7 @@
 import Request from '@/api/Request'
 
 export default function assetsService() {
-  const { get, post } = Request()
+  const { get, post, remove, update } = Request()
   const _apiBase = 'assets'
 
   const list = async () => {
@@ -31,9 +31,29 @@ export default function assetsService() {
     }
   }
 
+  const deleteAsset = async (id) => {
+    try {
+      const response = await remove(`${_apiBase}/${id}`, true)
+      return response
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const edit = async (id, data) => {
+    try {
+      const response = await update(`${_apiBase}/${id}`, data, true)
+      return response
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return {
     list,
     selectData,
-    create
+    create,
+    deleteAsset,
+    edit
   }
 }
