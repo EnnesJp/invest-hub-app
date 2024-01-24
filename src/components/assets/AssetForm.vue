@@ -5,20 +5,32 @@ import SelectInput from '@/components/base/SelectInput.vue';
 import savingPlanService from '@/api/modules/savingPlans';
 import portfolioService from '@/api/modules/portfolios';
 import assetsService from '@/api/modules/assets';
+import StringHelper from '@/helpers/StringHelper';
+import type { Asset } from '@/types/AssetsHelper';
 import { useAuthStore } from '@/stores/auth';
 import { ref, onBeforeMount } from 'vue'
 
+interface Props {
+  asset: Asset
+  isEditing: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  asset: () => ({} as Asset),
+  isEditing: false,
+})
+
 const authStore = useAuthStore();
 const form = ref({
-  name: '',
-  value: '',
-  acquisition_date: '',
-  quantity: '',
-  liquidity_days: '',
-  liquidity_date: '',
-  income_tax: '',
-  portfolio_id: '',
-  saving_plan_id: '',
+  name: props.isEditing ? props.asset.name : '',
+  value: props.isEditing ? props.asset.value : '',
+  acquisition_date: props.isEditing ? StringHelper.formatDate(props.asset.acquisition_date) : '',
+  quantity: props.isEditing ? props.asset.quantity : '',
+  liquidity_days: props.isEditing ? props.asset.liquidity_days : '',
+  liquidity_date: props.isEditing && props.asset.liquidity_date ? StringHelper.formatDate(props.asset.liquidity_date) : '',
+  income_tax: props.isEditing ? props.asset.income_tax : '',
+  portfolio_id: props.isEditing ? props.asset.portfolio_id : '',
+  saving_plan_id: props.isEditing ? props.asset.saving_plan_id : '',
   user_id: authStore.user?.id
 })
 

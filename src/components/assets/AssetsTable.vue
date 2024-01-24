@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import IconDots from '@/components/icons/IconDots.vue';
 import Modal from '@/components/base/Modal.vue';
 import AssetForm from '@/components/assets/AssetForm.vue';
 import StringHelper from '@/helpers/StringHelper';
+import ActionTableButton from '@/components/base/ActionTableButton.vue';
+import assetsService from '@/api/modules/assets';
 import type { Asset } from '@/types/AssetsHelper';
 import { ref } from 'vue';
 
@@ -17,6 +18,28 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const showModal = ref(false)
+const { deleteAsset } = assetsService()
+const isEditing = ref(false)
+const emit = defineEmits(['updateAssets'])
+const assetData = ref({} as Asset)
+
+function close() {
+  showModal.value = false
+  isEditing.value = false
+}
+
+function editAsset(asset: Asset) {
+  showModal.value = true
+  isEditing.value = true
+  assetData.value = asset
+}
+
+function deleteAssetById(id: string) {
+  deleteAsset(id)
+    .then((response: any) => {
+      emit('updateAssets')
+    })
+}
 </script>
 
 <template>
@@ -91,7 +114,11 @@ const showModal = ref(false)
             {{ StringHelper.formatCurrencyBR(asset.income_tax) }}
           </span>
           <span class="assets-table-body__content-item-title end">
-            <IconDots />
+            <ActionTableButton
+              :objectData="asset"
+              @edit="editAsset"
+              @delete="deleteAssetById"
+            />
           </span>
         </div>
       </div>
@@ -104,10 +131,12 @@ const showModal = ref(false)
     width="600px"
     icon="coin"
     iconBorder
-    @close="showModal = false"
+    @close="close"
   >
     <template #body>
-      <AssetForm 
+      <AssetForm
+        :asset="assetData"
+        :isEditing="isEditing"
         @close="showModal = false"
         @updateAssets="$emit('updateAssets')"
       />
@@ -268,6 +297,7 @@ const showModal = ref(false)
         font-weight: 500;
         line-height: 20.4px; 
         width: 20%;
+        position: relative;
         &.center {
           justify-content: center;
         }
