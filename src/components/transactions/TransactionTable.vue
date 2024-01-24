@@ -115,7 +115,7 @@ function deleteTransactionById(id: string) {
           </span>
           <span class="transactions-table-body__content-item-title end">
             <ActionTableButton
-              :transaction="transaction"
+              :objectData="transaction"
               @edit="editTransaction"
               @delete="deleteTransactionById"
             />
@@ -138,7 +138,7 @@ function deleteTransactionById(id: string) {
         :transaction="transactionData"
         :isEditing="isEditing"
         @close="showModal = false"
-        @updateTransactions="emit('updateTransactions')"
+        @updateTransactions="$emit('updateTransactions')"
       />
     </template>
   </Modal>

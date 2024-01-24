@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import IconDots from '@/components/icons/IconDots.vue';
-import type { Transaction } from '@/types/TransactionsHelper';
 import { ref } from 'vue';
 
 interface Props {
-  transaction: Transaction,
+  objectData: object,
 }
 
 const props = defineProps<Props>()
 const showDropdown = ref(false)
 const emit = defineEmits(['edit', 'delete'])
+
+function edit() {
+  emit('edit', props.objectData)
+  showDropdown.value = false
+}
 </script>
 
 <template>
@@ -23,7 +27,7 @@ const emit = defineEmits(['edit', 'delete'])
   >
     <div
       class="action-button-dropdown__item"
-      @click="emit('edit', props.transaction)"
+      @click="edit"
     >
       <span class="action-button-dropdown__item-title">
         Edit
@@ -31,7 +35,7 @@ const emit = defineEmits(['edit', 'delete'])
     </div>
     <div
       class="action-button-dropdown__item"
-      @click="emit('delete', props.transaction)"
+      @click="emit('delete', props.objectData)"
     >
       <span class="action-button-dropdown__item-title">
         Delete
