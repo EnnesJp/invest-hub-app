@@ -78,10 +78,10 @@ const props = withDefaults(defineProps<Props>(), {
         display: flex;
         width: 48px;
         height: 48px;
-        padding: 12px;
         justify-content: center;
         align-items: center;
         &.modal-header__icon--border {
+          padding: 12px;
           border-radius: 10px;
           border: 1px solid var(--color-border-modal);
           background: var(--color-background);

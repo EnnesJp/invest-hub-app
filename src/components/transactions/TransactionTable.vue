@@ -3,6 +3,7 @@ import TransactionTotals from '@/components/transactions/TransactionTotals.vue';
 import TransactionForm from '@/components/transactions/TransactionForm.vue';
 import Modal from '@/components/base/Modal.vue';
 import ActionTableButton from '@/components/base/ActionTableButton.vue';
+import DeleteConfirmation from '@/components/base/DeleteConfirmation.vue';
 import transactionService from '@/api/modules/transactions';
 import StringHelper from '@/helpers/StringHelper';
 import type { Transaction } from '@/types/TransactionsHelper';
@@ -25,6 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const showModal = ref(false)
+const showDeleteModal = ref(false)
 const { deleteTransaction } = transactionService()
 const emit = defineEmits(['updateTransactions'])
 const isEditing = ref(false)
@@ -32,6 +34,7 @@ const transactionData = ref({} as Transaction)
 
 function close() {
   showModal.value = false
+  showDeleteModal.value = false
   isEditing.value = false
 }
 
@@ -41,10 +44,19 @@ function editTransaction(transaction: Transaction) {
   transactionData.value = transaction
 }
 
-function deleteTransactionById(id: string) {
-  deleteTransaction(id)
-    .then((response: any) => {
+function deleteBtnAction(transaction: Transaction) {
+  showDeleteModal.value = true
+  transactionData.value = transaction
+}
+
+function deleteTransactionById() {
+  deleteTransaction(transactionData.value['id'])
+    .then(() => {
       emit('updateTransactions')
+      showDeleteModal.value = false
+    })
+    .catch((error) => {
+      console.log(error)
     })
 }
 </script>
@@ -117,7 +129,7 @@ function deleteTransactionById(id: string) {
             <ActionTableButton
               :objectData="transaction"
               @edit="editTransaction"
-              @delete="deleteTransactionById"
+              @delete="deleteBtnAction"
             />
           </span>
         </div>
@@ -139,6 +151,22 @@ function deleteTransactionById(id: string) {
         :isEditing="isEditing"
         @close="showModal = false"
         @updateTransactions="$emit('updateTransactions')"
+      />
+    </template>
+  </Modal>
+  <Modal
+    :show="showDeleteModal"
+    title="Delete Transaction"
+    width="700px"
+    icon="delete"
+    @close="close"
+  >
+    <template #body>
+      <DeleteConfirmation
+        :id="transactionData.id"
+        :message="`Are you sure you want to delete the transaction '${transactionData.description}'? This action cannot be undone.`"
+        @close="showDeleteModal = false"
+        @delete="deleteTransactionById"
       />
     </template>
   </Modal>
