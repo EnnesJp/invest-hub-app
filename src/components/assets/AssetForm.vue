@@ -2,6 +2,7 @@
 import BaseInput from '@/components/base/BaseInput.vue'
 import CurrencyInput from '@/components/base/CurrencyInput.vue'
 import SelectInput from '@/components/base/SelectInput.vue';
+import LoadingSpinner from '@/components/base/LoadingSpinner.vue';
 import savingPlanService from '@/api/modules/savingPlans';
 import portfolioService from '@/api/modules/portfolios';
 import assetsService from '@/api/modules/assets';
@@ -36,15 +37,18 @@ const form = ref({
 
 const isRequestingSavingPlan = ref(true)
 const isRequestingPortfolio = ref(true)
+const isRequesting = ref(false)
 const portfolioOptions = ref([])
 const savingPlanOptions = ref([])
 const emit = defineEmits(['close', 'updateAssets'])
 
 function saveAsset() {
+  isRequesting.value = true
   assetsService().create(form.value)
     .then((response: any) => {
       emit('updateAssets')
       emit('close')
+      isRequesting.value = false
     })
     .catch((error: any) => {
       console.log(error)
@@ -161,7 +165,8 @@ onBeforeMount(() => {
         class="btn btn--primary"
         @click="saveAsset"
       >
-        Save
+        <LoadingSpinner v-if="isRequesting" />
+        <span v-else>Save</span>
       </button>
     </div>
   </div>

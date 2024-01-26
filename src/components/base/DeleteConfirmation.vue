@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import LoadingSpinner from '@/components/base/LoadingSpinner.vue';S
+
 interface Props {
   message?: string
   id: string
+  isRequesting: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   message: 'Are you sure?',
+  isRequesting: false,
 })
 
 const emit = defineEmits(['close', 'delete'])
@@ -17,8 +21,19 @@ const emit = defineEmits(['close', 'delete'])
       <h2>{{ message }}</h2>
     </div>
     <div class="confirmation__actions">
-      <button class="btn btn--secondary" @click="emit('close')">Cancel</button>
-      <button class="btn btn--warning" @click="emit('delete')">Delete</button>
+      <button
+        class="btn btn--secondary"
+        @click="emit('close')"
+      >
+        Cancel
+      </button>
+      <button
+        class="btn btn--warning"
+        @click="emit('delete')"
+      >
+        <LoadingSpinner v-if="isRequesting" />
+        <span v-else>Delete</span>
+      </button>
     </div>
   </div>
 </template>

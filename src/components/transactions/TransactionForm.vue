@@ -2,6 +2,7 @@
 import BaseInput from '@/components/base/BaseInput.vue'
 import CurrencyInput from '@/components/base/CurrencyInput.vue'
 import SelectInput from '@/components/base/SelectInput.vue';
+import LoadingSpinner from '@/components/base/LoadingSpinner.vue';
 import assetsService from '@/api/modules/assets';
 import transactionService from '@/api/modules/transactions';
 import StringHelper from '@/helpers/StringHelper';
@@ -33,7 +34,8 @@ const form = ref({
 console.log(props.transaction)
 console.log(form.value)
 
-const isRequesting = ref(true)
+const isRequesting = ref(false)
+const isRequestingAssets = ref(true)
 const typeOptions = ref([
   { label: 'Credit', value: 'credit' },
   { label: 'Debit', value: 'debit' },
@@ -50,10 +52,12 @@ function btnAction() {
 }
 
 function saveTransaction() {
+  isRequesting.value = true
   transactionService().create(form.value)
     .then((response: any) => {
       emit('updateTransactions')
       emit('close')
+      isRequesting.value = false
     })
     .catch((error: any) => {
       console.log(error)
@@ -80,7 +84,7 @@ onMounted(() => {
       console.log(error)
     })
     .finally(() => {
-      isRequesting.value = false
+      isRequestingAssets.value = false
     })
 })
 </script>
@@ -137,7 +141,8 @@ onMounted(() => {
         class="btn btn--primary"
         @click="btnAction"
       >
-        Save
+        <LoadingSpinner v-if="isRequesting" />
+        <span v-else>Save</span>
       </button>
     </div>
   </div>
