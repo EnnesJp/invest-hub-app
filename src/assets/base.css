@@ -14,11 +14,12 @@
   --vt-c-grey-8: #888;
   --vt-c-grey-70: rgba(222, 222, 222, 0.70);
   --vt-c-grey-300: #D0D5DD;
-
+  --vt-c-grey-600: #475467;
 
   --vt-c-black: #181818;
   --vt-c-black-transparent: rgba(0, 0, 0, 0.4);
-  --vt-c-black-transparent-2: rgba(0, 0, 0, 0.5);
+  --vt-c-black-transparent-2: rgba(0, 0, 0, 0.1);
+  --vt-c-black-transparent-3: rgba(0, 0, 0, 0.25);
   --vt-c-black-shadow: rgba(0, 0, 0, 0.1);
   --vt-c-black-shadow-2: rgba(16, 24, 40, 0.04);
   --vt-c-black-shadow-3: rgba(16, 24, 40, 0.10);
@@ -38,6 +39,8 @@
 
   --vt-c-red: #FE3766;
   --vt-c-red-transparent: #fe376630;
+  --vt-c-red-600: #D92D20;
+  --vt-c-red-700: #bf271c;
 
   --vt-c-green: #31D3A3;
   --vt-c-green-transparent: #31d3a230;
@@ -49,6 +52,7 @@
   --color-background: var(--vt-c-white);
   --color-background-disabled: var(--vt-c-grey);
   --color-background-select-input-hover: var(--vt-c-grey);
+  --color-background-button-hover: var(--vt-c-grey);
   --color-background-soft: var(--vt-c-white-soft-5);
   --color-background-guess: var(--vt-c-black-transparent);
   --color-background-menu: var(--vt-c-white);
@@ -67,6 +71,8 @@
   --color-background-progress-bar-first: var(--vt-c-blue-light);
   --color-background-progress-bar-second: var(--vt-c-yellow);
   --color-background-progress-bar-third: var(--vt-c-green-light);
+  --color-background-btn-warning: var(--vt-c-red-600);
+  --color-background-btn-warning-hover: var(--vt-c-red-700);
 
   --color-text: var(--vt-c-blue-dark);
   --color-text-dark: var(--vt-c-black);
@@ -82,6 +88,7 @@
   --color-text-progress-second: var(--vt-c-yellow);
   --color-text-progress-third: var(--vt-c-green-light);
   --color-text-input: var(--vt-c-blue-grey-2);
+  --color-text-modal: var(--vt-c-grey-600);
 
   --color-border-guess: var(--vt-c-white);
   --color-border-menu: var(--vt-c-blue-light);
@@ -94,11 +101,14 @@
   --color-border-input: var(--vt-c-grey-300);
 
   --color-shadow: var(--vt-c-black-shadow);
+  --color-shadow-dropdown: var(--vt-c-black-transparent-3);
+
   --color-modal-shadow: var(--vt-c-black-shadow-2);
   --color-modal-shadow-2: var(--vt-c-black-shadow-3);
   --color-modal-shadow-4: var(--vt-c-black-shadow-4);
 
   --color-modal-mask: var(--vt-c-black-transparent-2);
+  --color-border-table-hover: var(--vt-c-grey-5);
 }
 
 /* @media (prefers-color-scheme: dark) {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SelectOption } from '@/types/InputHelper'
 import IconSelectArrow from '../icons/IconSelectArrow.vue';
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 interface Props {
   modelValue: string,
@@ -21,6 +21,10 @@ function selectOption(option: SelectOption) {
   selectedOption.value = option
   emit('update:modelValue', option.value)
 }
+
+onMounted(() => {
+  selectedOption.value = props.options.find(option => option.value === props.modelValue) ?? null
+})
 </script>
 
 <template>

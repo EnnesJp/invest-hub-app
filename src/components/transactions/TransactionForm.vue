@@ -4,19 +4,34 @@ import CurrencyInput from '@/components/base/CurrencyInput.vue'
 import SelectInput from '@/components/base/SelectInput.vue';
 import assetsService from '@/api/modules/assets';
 import transactionService from '@/api/modules/transactions';
+import StringHelper from '@/helpers/StringHelper';
 import { useAuthStore } from '@/stores/auth';
+import type { Transaction } from '@/types/TransactionsHelper';
 import { ref, onMounted } from 'vue'
+
+interface Props {
+  transaction: Transaction
+  isEditing: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  transaction: () => ({} as Transaction),
+  isEditing: false,
+})
 
 const authStore = useAuthStore();
 const { selectData } = assetsService()
 const form = ref({
-  description: '',
-  value: '',
-  date: '',
-  type: '',
-  asset_id: '',
+  description: props.isEditing ? props.transaction.description : '',
+  value: props.isEditing ? props.transaction.value : '',
+  date: props.isEditing ? StringHelper.formatDate(props.transaction.date) : '',
+  type: props.isEditing ? props.transaction.type : '',
+  asset_id: props.isEditing ? props.transaction.asset_id : '',
   user_id: authStore.user?.id
 })
+
+console.log(props.transaction)
+console.log(form.value)
 
 const isRequesting = ref(true)
 const typeOptions = ref([
@@ -26,8 +41,27 @@ const typeOptions = ref([
 const assetOptions = ref([])
 const emit = defineEmits(['close', 'updateTransactions'])
 
+function btnAction() {
+  if (props.isEditing) {
+    editTransaction(props.transaction.id)
+  }
+
+  saveTransaction()
+}
+
 function saveTransaction() {
   transactionService().create(form.value)
+    .then((response: any) => {
+      emit('updateTransactions')
+      emit('close')
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
+}
+
+function editTransaction(id: string) {
+  transactionService().edit(id)
     .then((response: any) => {
       emit('updateTransactions')
       emit('close')
@@ -101,7 +135,7 @@ onMounted(() => {
       </button>
       <button
         class="btn btn--primary"
-        @click="saveTransaction"
+        @click="btnAction"
       >
         Save
       </button>

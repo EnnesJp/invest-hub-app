@@ -13,4 +13,13 @@ export default class StringHelper {
   static liquidityLabel(value) {
     return `D +${value}`
   }
+
+  static formatDate(date) {
+    const dateArray = date.split('/')
+    const day = dateArray[0]
+    const month = dateArray[1]
+    const year = dateArray[2]
+    
+    return `${year}-${month}-${day}`
+  }
 }

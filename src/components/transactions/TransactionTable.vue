@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import IconDots from '@/components/icons/IconDots.vue';
 import TransactionTotals from '@/components/transactions/TransactionTotals.vue';
 import TransactionForm from '@/components/transactions/TransactionForm.vue';
 import Modal from '@/components/base/Modal.vue';
+import ActionTableButton from '@/components/base/ActionTableButton.vue';
+import DeleteConfirmation from '@/components/base/DeleteConfirmation.vue';
+import transactionService from '@/api/modules/transactions';
 import StringHelper from '@/helpers/StringHelper';
 import type { Transaction } from '@/types/TransactionsHelper';
 import { ref } from 'vue';
@@ -24,6 +26,39 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const showModal = ref(false)
+const showDeleteModal = ref(false)
+const { deleteTransaction } = transactionService()
+const emit = defineEmits(['updateTransactions'])
+const isEditing = ref(false)
+const transactionData = ref({} as Transaction)
+
+function close() {
+  showModal.value = false
+  showDeleteModal.value = false
+  isEditing.value = false
+}
+
+function editTransaction(transaction: Transaction) {
+  isEditing.value = true
+  showModal.value = true
+  transactionData.value = transaction
+}
+
+function deleteBtnAction(transaction: Transaction) {
+  showDeleteModal.value = true
+  transactionData.value = transaction
+}
+
+function deleteTransactionById() {
+  deleteTransaction(transactionData.value['id'])
+    .then(() => {
+      emit('updateTransactions')
+      showDeleteModal.value = false
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
 </script>
 
 <template>
@@ -91,7 +126,11 @@ const showModal = ref(false)
               {{ StringHelper.formatCurrencyBR(transaction.value) }}
           </span>
           <span class="transactions-table-body__content-item-title end">
-            <IconDots />
+            <ActionTableButton
+              :objectData="transaction"
+              @edit="editTransaction"
+              @delete="deleteBtnAction"
+            />
           </span>
         </div>
       </div>
@@ -104,12 +143,30 @@ const showModal = ref(false)
     width="600px"
     icon="card"
     iconBorder
-    @close="showModal = false"
+    @close="close"
   >
     <template #body>
-      <TransactionForm 
+      <TransactionForm
+        :transaction="transactionData"
+        :isEditing="isEditing"
         @close="showModal = false"
         @updateTransactions="$emit('updateTransactions')"
+      />
+    </template>
+  </Modal>
+  <Modal
+    :show="showDeleteModal"
+    title="Delete Transaction"
+    width="700px"
+    icon="delete"
+    @close="close"
+  >
+    <template #body>
+      <DeleteConfirmation
+        :id="transactionData.id"
+        :message="`Are you sure you want to delete the transaction '${transactionData.description}'? This action cannot be undone.`"
+        @close="showDeleteModal = false"
+        @delete="deleteTransactionById"
       />
     </template>
   </Modal>
@@ -268,6 +325,7 @@ const showModal = ref(false)
         font-weight: 500;
         line-height: 20.4px; 
         width: 20%;
+        position: relative;
         &.center {
           justify-content: center;
         }

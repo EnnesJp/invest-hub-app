@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import IconDots from '@/components/icons/IconDots.vue';
 import Modal from '@/components/base/Modal.vue';
 import AssetForm from '@/components/assets/AssetForm.vue';
 import StringHelper from '@/helpers/StringHelper';
+import ActionTableButton from '@/components/base/ActionTableButton.vue';
+import DeleteConfirmation from '@/components/base/DeleteConfirmation.vue';
+import assetsService from '@/api/modules/assets';
 import type { Asset } from '@/types/AssetsHelper';
 import { ref } from 'vue';
 
@@ -17,6 +19,39 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const showModal = ref(false)
+const showDeleteModal = ref(false)
+const { deleteAsset } = assetsService()
+const isEditing = ref(false)
+const emit = defineEmits(['updateAssets'])
+const assetData = ref({} as Asset)
+
+function close() {
+  showModal.value = false
+  showDeleteModal.value = false
+  isEditing.value = false
+}
+
+function editAsset(asset: Asset) {
+  showModal.value = true
+  isEditing.value = true
+  assetData.value = asset
+}
+
+function deleteBtnAction(asset: Asset) {
+  showDeleteModal.value = true
+  assetData.value = asset
+}
+
+function deleteAssetById() {
+  deleteAsset(assetData.value.id)
+    .then((response: any) => {
+      emit('updateAssets')
+      showDeleteModal.value = false
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
+}
 </script>
 
 <template>
@@ -91,7 +126,11 @@ const showModal = ref(false)
             {{ StringHelper.formatCurrencyBR(asset.income_tax) }}
           </span>
           <span class="assets-table-body__content-item-title end">
-            <IconDots />
+            <ActionTableButton
+              :objectData="asset"
+              @edit="editAsset"
+              @delete="deleteBtnAction"
+            />
           </span>
         </div>
       </div>
@@ -104,12 +143,30 @@ const showModal = ref(false)
     width="600px"
     icon="coin"
     iconBorder
-    @close="showModal = false"
+    @close="close"
   >
     <template #body>
-      <AssetForm 
+      <AssetForm
+        :asset="assetData"
+        :isEditing="isEditing"
         @close="showModal = false"
         @updateAssets="$emit('updateAssets')"
+      />
+    </template>
+  </Modal>
+  <Modal
+    :show="showDeleteModal"
+    title="Delete Transaction"
+    width="700px"
+    icon="delete"
+    @close="close"
+  >
+    <template #body>
+      <DeleteConfirmation
+        :id="assetData.id"
+        :message="`Are you sure you want to delete the asset '${assetData.name}'? This action cannot be undone.`"
+        @close="showDeleteModal = false"
+        @delete="deleteAssetById"
       />
     </template>
   </Modal>
@@ -234,7 +291,7 @@ const showModal = ref(false)
     align-self: stretch;
     border-radius: 8px;
     background-color: var(--color-background);
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 590px;
 
     &::-webkit-scrollbar {
@@ -268,6 +325,7 @@ const showModal = ref(false)
         font-weight: 500;
         line-height: 20.4px; 
         width: 20%;
+        position: relative;
         &.center {
           justify-content: center;
         }

@@ -1,7 +1,7 @@
 import Request from '@/api/Request'
 
 export default function transactionService() {
-  const { get, post } = Request()
+  const { get, remove, update, post } = Request()
   const _apiBase = 'transactions'
 
   const list = async () => {
@@ -21,9 +21,29 @@ export default function transactionService() {
       console.error(error)
     }
   }
+  
+  const deleteTransaction = async (id) => {
+    try {
+      const response = await remove(`${_apiBase}/${id}`, true)
+      return response
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const edit = async (id, data) => {
+    try {
+      const response = await update(`${_apiBase}/${id}`, data, true)
+      return response
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return {
     list,
-    create
+    create,
+    deleteTransaction,
+    edit
   }
 }
