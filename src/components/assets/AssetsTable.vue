@@ -24,6 +24,7 @@ const { deleteAsset } = assetsService()
 const isEditing = ref(false)
 const emit = defineEmits(['updateAssets'])
 const assetData = ref({} as Asset)
+const isRequestingDelete = ref(false)
 
 function close() {
   showModal.value = false
@@ -43,9 +44,11 @@ function deleteBtnAction(asset: Asset) {
 }
 
 function deleteAssetById() {
+  isRequestingDelete.value = true
   deleteAsset(assetData.value.id)
     .then((response: any) => {
       emit('updateAssets')
+      isRequestingDelete.value = false
       showDeleteModal.value = false
     })
     .catch((error: any) => {
@@ -165,6 +168,7 @@ function deleteAssetById() {
       <DeleteConfirmation
         :id="assetData.id"
         :message="`Are you sure you want to delete the asset '${assetData.name}'? This action cannot be undone.`"
+        :isRequesting="isRequestingDelete"
         @close="showDeleteModal = false"
         @delete="deleteAssetById"
       />
