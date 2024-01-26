@@ -31,6 +31,7 @@ const { deleteTransaction } = transactionService()
 const emit = defineEmits(['updateTransactions'])
 const isEditing = ref(false)
 const transactionData = ref({} as Transaction)
+const isRequestingDelete = ref(false)
 
 function close() {
   showModal.value = false
@@ -50,10 +51,12 @@ function deleteBtnAction(transaction: Transaction) {
 }
 
 function deleteTransactionById() {
+  isRequestingDelete.value = true
   deleteTransaction(transactionData.value['id'])
     .then(() => {
       emit('updateTransactions')
       showDeleteModal.value = false
+      isRequestingDelete.value = false
     })
     .catch((error) => {
       console.log(error)
@@ -165,6 +168,7 @@ function deleteTransactionById() {
       <DeleteConfirmation
         :id="transactionData.id"
         :message="`Are you sure you want to delete the transaction '${transactionData.description}'? This action cannot be undone.`"
+        :isRequesting="isRequestingDelete"
         @close="showDeleteModal = false"
         @delete="deleteTransactionById"
       />
