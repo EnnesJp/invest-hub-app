@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<Props>(), {
 .dashboard-portfolios {
   display: flex;
   flex-direction: column;
-  width: 27%;
+  width: 28%;
   padding: 16px;
   align-items: flex-start;
   flex-shrink: 0;
@@ -46,6 +46,7 @@ const props = withDefaults(defineProps<Props>(), {
 
   border-radius: 14px;
   background: var(--color-background);
+
   .dashboard-portfolios-header {
     display: flex;
     justify-content: space-between;
@@ -53,6 +54,7 @@ const props = withDefaults(defineProps<Props>(), {
     width: 100%;
     padding-bottom: 24px;
     border-bottom: 1px solid var(--color-border-menu-transparent);
+
     .dashboard-portfolios__title {
       color: var(--color-text);
       font-feature-settings: 'clig' off, 'liga' off;
@@ -62,6 +64,7 @@ const props = withDefaults(defineProps<Props>(), {
       line-height: normal;
       letter-spacing: -1px;
     }
+
     .dashboard-portfolios__link {
       color: var(--color-text-link);
       font-size: 16px;
@@ -70,11 +73,13 @@ const props = withDefaults(defineProps<Props>(), {
       line-height: 24px;
     }
   }
+
   .dashboard-portfolios__list {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 24px;
+
     .dashboard-portfolios__item {
       display: flex;
       justify-content: space-between;
@@ -83,6 +88,7 @@ const props = withDefaults(defineProps<Props>(), {
       padding: 16px;
       border-radius: 14px;
       background: var(--color-background-soft);
+
       .dashboard-portfolios__item-title {
         color: var(--color-text);
         font-size: 16px;
@@ -90,6 +96,7 @@ const props = withDefaults(defineProps<Props>(), {
         font-weight: 500;
         line-height: 24px;
       }
+
       .dashboard-portfolios__item-value {
         color: var(--color-text);
         font-size: 16px;

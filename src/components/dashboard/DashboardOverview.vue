@@ -10,7 +10,7 @@ interface Props {
   isRequesting?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   isRequesting: false,
 })
 </script>
@@ -18,12 +18,14 @@ const props = withDefaults(defineProps<Props>(), {
 <template>
   <div class="dashboard-overview">
     <div class="dashboard-overview__title">Overview</div>
+
     <div class="dashboard-overview__info">
       <div class="dashboard-overview__info-item focus">
         <div class="dashboard-overview__info-item-title">
           <IconWallet />
           Total Balance
         </div>
+
         <div class="dashboard-overview__info-item-value" v-if="isRequesting">
           <AnimatedPlaceholder
             width="100%"
@@ -33,16 +35,19 @@ const props = withDefaults(defineProps<Props>(), {
             colorSecondary="#0d163a74"
           />
         </div>
+
         <div class="dashboard-overview__info-item-value" v-else>
           {{ totalBalance  }}
           <IconArrow />
         </div>
       </div>
+
       <div class="dashboard-overview__info-item">
         <div class="dashboard-overview__info-item-title">
           <IconSave />
           Net Total
         </div>
+
         <div class="dashboard-overview__info-item-value" v-if="isRequesting">
           <AnimatedPlaceholder
             width="100%"
@@ -50,6 +55,7 @@ const props = withDefaults(defineProps<Props>(), {
             borderRadius="8px"
           />
         </div>
+
         <div class="dashboard-overview__info-item-value" v-else>
           {{ netTotal }}
           <IconArrow color="#0D163A"/>
@@ -72,16 +78,19 @@ const props = withDefaults(defineProps<Props>(), {
 
   border-radius: 14px;
   background: var(--color-background);
+
   .dashboard-overview__title {
     font-size: 20px;
     font-weight: 600;
     color: var(--color-text);
   }
+
   .dashboard-overview__info {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
     gap: 18px;
+
     .dashboard-overview__info-item {
       display: flex;
       padding: 20px;
@@ -108,6 +117,7 @@ const props = withDefaults(defineProps<Props>(), {
           color: var(--color-text-light);
         }
       }
+
       .dashboard-overview__info-item-title {
         width: 100%;
         display: flex;
@@ -122,6 +132,7 @@ const props = withDefaults(defineProps<Props>(), {
         border-bottom: 1px solid var(--color-border-dashboard-dark);
         padding-bottom: 18px;
       }
+      
       .dashboard-overview__info-item-value {
         display: flex;
         width: 100%;

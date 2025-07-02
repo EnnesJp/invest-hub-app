@@ -83,6 +83,7 @@ onMounted(() => {
                     </RouterLink>
                 </div>
             </div>
+
             <div class="side-bar-menu__bottom">
                 <RouterLink to="/help" class="side-bar-menu-link">
                     <IconInfoCircle />
@@ -128,6 +129,7 @@ onMounted(() => {
     justify-content: stretch;
     min-height: 100vh;
     background-color: var(--color-background-soft);
+
     .side-bar-menu {
         display: flex;
         flex-direction: column;
@@ -137,19 +139,23 @@ onMounted(() => {
         padding: 1.5rem 0;
         background-color: var(--color-background-menu);
         box-shadow: 0 0 10px var(--color-shadow);
+
         .side-bar-menu__top {
             display: flex;
             flex-direction: column;
             height: 100%;
+
             .side-bar-menu-logo {
                 width: 100%;
                 margin-top: -215px;
             }
+
             .side-bar-menu-links {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 margin-top: -180px;
+
                 .side-bar-menu-link {
                     display: flex;
                     align-items: center;
@@ -158,10 +164,13 @@ onMounted(() => {
                     font-weight: 600;
                     gap: 16px;
                     text-decoration: none;
-                    padding: 0 45px;
+                    padding: 0 41px;
+                    border-left: 4px solid transparent;
+
                     &:hover {
                         border-left: 4px solid var(--color-border-menu);
                     }
+
                     &.selected {
                         border-left: 4px solid var(--color-border-menu);
                         padding: 0 45px 0 41px;
@@ -169,11 +178,13 @@ onMounted(() => {
                 }
             }
         }
+
         .side-bar-menu__bottom {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             margin-top: 1.5rem;
+
             .side-bar-menu-link {
                 display: flex;
                 align-items: center;
@@ -183,10 +194,13 @@ onMounted(() => {
                 text-decoration: none;
                 gap: 16px;
                 cursor: pointer;
-                padding: 0 45px;
+                padding: 0 41px;
+                border-left: 4px solid transparent;
+
                 &:hover {
                     border-left: 4px solid var(--color-border-menu);
                 }
+
                 &.selected {
                     border-left: 4px solid var(--color-border-menu);
                     padding: 0 45px 0 41px;
@@ -194,17 +208,22 @@ onMounted(() => {
             }
         }
     }
+
     .application-body {
         display: flex;
         flex-direction: column;
         padding: 1.5rem;
         flex: 1;
+        max-height: 100vh;
+        overflow-y: auto;
+
         .application-top-bar {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 1.5rem;
+
             .search-bar {
                 display: flex;
                 flex-direction: row;
@@ -215,6 +234,7 @@ onMounted(() => {
                 width: 722px;
                 height: 64px;
                 gap: 10px;
+
                 .search-bar-input {
                     border: none;
                     outline: none;
@@ -229,6 +249,7 @@ onMounted(() => {
                     }
                 }
             }
+
             .top-bar__right {
                 display: flex;
                 flex-direction: row;
@@ -238,11 +259,13 @@ onMounted(() => {
                 border-radius: 100px;
                 padding: 13px 20px;
                 height: 64px;
+
                 .top-bar__right__user {
                     display: flex;
                     flex-direction: row;
                     align-items: center;
                     gap: 10px;
+
                     .top-bar__right__user__avatar {
                         display: flex;
                         align-items: center;
@@ -257,6 +280,7 @@ onMounted(() => {
                             font-weight: 600;
                         }
                     }
+
                     .top-bar__right__user__name {
                         font-size: 14px;
                         color: var(--color-text);
