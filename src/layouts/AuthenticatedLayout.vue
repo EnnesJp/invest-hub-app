@@ -83,6 +83,7 @@ onMounted(() => {
                     </RouterLink>
                 </div>
             </div>
+
             <div class="side-bar-menu__bottom">
                 <RouterLink to="/help" class="side-bar-menu-link">
                     <IconInfoCircle />
@@ -163,7 +164,8 @@ onMounted(() => {
                     font-weight: 600;
                     gap: 16px;
                     text-decoration: none;
-                    padding: 0 45px;
+                    padding: 0 41px;
+                    border-left: 4px solid transparent;
 
                     &:hover {
                         border-left: 4px solid var(--color-border-menu);
@@ -192,7 +194,8 @@ onMounted(() => {
                 text-decoration: none;
                 gap: 16px;
                 cursor: pointer;
-                padding: 0 45px;
+                padding: 0 41px;
+                border-left: 4px solid transparent;
 
                 &:hover {
                     border-left: 4px solid var(--color-border-menu);
