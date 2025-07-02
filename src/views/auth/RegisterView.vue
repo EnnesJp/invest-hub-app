@@ -4,7 +4,5 @@ import RegisterForm from '@/components/auth/RegisterForm.vue';
 </script>
 
 <template>
-    <GuestLayout>
-        <RegisterForm />
-    </GuestLayout>
+    <RegisterForm />
 </template>

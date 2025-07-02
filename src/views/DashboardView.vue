@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
 import DashboardOverview from '@/components/dashboard/DashboardOverview.vue';
 import DashboardPortfolios from '@/components/dashboard/DashboardPortfolios.vue';
 import DashboardSavingPlans from '@/components/dashboard/DashboardSavingPlans.vue';
@@ -31,24 +30,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <AuthenticatedLayout>
-    <div class="dashboard-view">
-      <div class="dashboard-view__top">
-        <DashboardOverview
-          :total-balance="totalBalance"
-          :net-total="netTotal"
-          :is-requesting="isRequesting"
-        />
+  <div class="dashboard-view">
+    <div class="dashboard-view__top">
+      <DashboardOverview
+        :total-balance="totalBalance"
+        :net-total="netTotal"
+        :is-requesting="isRequesting"
+      />
 
-        <DashboardPortfolios :portfolios="portfolios" />
-      </div>
-
-      <div class="dashboard-view__bottom">
-        <DashboardChart />
-        <DashboardSavingPlans />
-      </div>
+      <DashboardPortfolios :portfolios="portfolios" />
     </div>
-  </AuthenticatedLayout>
+
+    <div class="dashboard-view__bottom">
+      <DashboardChart />
+      <DashboardSavingPlans />
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

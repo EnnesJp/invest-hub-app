@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
 import AssetsTable from '@/components/assets/AssetsTable.vue';
 import AssetsLiquidityTotal from '@/components/assets/AssetsLiquidityTotal.vue';
 import assetsService from '@/api/modules/assets';
@@ -49,23 +48,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <AuthenticatedLayout>
-    <div class="wallet">
-      <div class="wallet-left">
-        <AssetsTable
-          :assets="assets"
-          :isRequesting="isRequesting"
-          @updateAssets="getAssetsData"
-        />
-      </div>
-      <div class="wallet-right">
-        <AssetsLiquidityTotal
-          :assets="assetsByLiquidity"
-          :isRequesting="isRequesting"
-        />
-      </div>
+  <div class="wallet">
+    <div class="wallet-left">
+      <AssetsTable
+        :assets="assets"
+        :isRequesting="isRequesting"
+        @updateAssets="getAssetsData"
+      />
     </div>
-  </AuthenticatedLayout>
+
+    <div class="wallet-right">
+      <AssetsLiquidityTotal
+        :assets="assetsByLiquidity"
+        :isRequesting="isRequesting"
+      />
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

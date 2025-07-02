@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
 import TransactionsTable from '@/components/transactions/TransactionTable.vue';
 import transactionService from '@/api/modules/transactions';
 import StringHelper from '@/helpers/StringHelper';
@@ -32,14 +31,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <AuthenticatedLayout>
-    <TransactionsTable
-      :transactions="transactions"
-      :isRequesting="isRequesting"
-      :totalTransactions="totalTransactions"
-      :totalCredit="totalCredit"
-      :totalDebit="totalDebit"
-      @updateTransactions="getTransactionsData"
-    />
-  </AuthenticatedLayout>
+  <TransactionsTable
+    :transactions="transactions"
+    :isRequesting="isRequesting"
+    :totalTransactions="totalTransactions"
+    :totalCredit="totalCredit"
+    :totalDebit="totalDebit"
+    @updateTransactions="getTransactionsData"
+  />
 </template>

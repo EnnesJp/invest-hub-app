@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import IconLogo from '@/components/icons/IconLogo.vue';
+import router from '@/router';
 </script>
 
 <template>
@@ -7,7 +8,8 @@ import IconLogo from '@/components/icons/IconLogo.vue';
         <div>
             <div class="container">
                 <IconLogo class="logo" />
-                <slot />
+                
+                <router-view/>
             </div>
         </div>
     </div>
