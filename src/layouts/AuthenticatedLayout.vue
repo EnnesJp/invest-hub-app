@@ -38,7 +38,7 @@ function getNameInitials(name: string) {
 
   if (names.length > 1) initials += names[names.length - 1][0]
   
-  return initials.toUpperCase()
+  return initials?.toUpperCase()
 };
 
 onMounted(() => {
@@ -116,11 +116,7 @@ onMounted(() => {
                 </div>
             </div>
 
-            <router-view v-slot="{ Component }" >
-                <transition name="fade" mode="out-in">
-                    <component :is="Component" />
-                </transition>
-            </router-view>
+            <router-view class="application-content" />
         </div>
     </div>
 </template>

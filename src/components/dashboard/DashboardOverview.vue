@@ -5,8 +5,8 @@ import IconArrow from '@/components/icons/IconArrow.vue'
 import AnimatedPlaceholder from '@/components/base/AnimatedPlaceholder.vue'
 
 interface Props {
-  totalBalance?: number
-  netTotal?: number
+  totalBalance?: string
+  netTotal?: string
   isRequesting?: boolean
 }
 

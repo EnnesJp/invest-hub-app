@@ -10,8 +10,8 @@ import { ref, onMounted } from 'vue';
 const { list } = portfolioService()
 
 const portfolios = ref([])
-const totalBalance = ref(0)
-const netTotal = ref(0)
+const totalBalance = ref("0")
+const netTotal = ref("0")
 const isRequesting = ref(true)
 
 onMounted(() => {
