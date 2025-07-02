@@ -39,8 +39,10 @@ onMounted(() => {
           :net-total="netTotal"
           :is-requesting="isRequesting"
         />
+
         <DashboardPortfolios :portfolios="portfolios" />
       </div>
+
       <div class="dashboard-view__bottom">
         <DashboardChart />
         <DashboardSavingPlans />
@@ -54,17 +56,18 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 16px;
+
   .dashboard-view__top {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2rem;
-    gap: 32px;
+    gap: 16px;
     width: 100%;
   }
+
   .dashboard-view__bottom {
     display: flex;
     justify-content: space-between;
-    gap: 32px;
+    gap: 16px;
     width: 100%;
   }
 }
