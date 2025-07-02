@@ -24,6 +24,7 @@ import IconLogo from '@/components/icons/IconLogo.vue';
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
     .container {
         display: flex;
         flex-direction: column;
@@ -33,8 +34,9 @@ import IconLogo from '@/components/icons/IconLogo.vue';
         min-height: 100vh;
         background: var(--color-background-guess);
         border-left: 1px solid var(--color-border-guess);
+
         .logo {
-            max-width: 100%;
+            max-width: 80%;
             margin-top: -150px;
         }
     }

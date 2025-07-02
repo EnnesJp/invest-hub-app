@@ -104,93 +104,97 @@ function submit() {
 
 <style scoped lang="scss">
 .register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  gap: 24px;
+  margin-top: -150px;
+
+  .register-input-container {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--color-border-guess);
+      width: 100%;
+
+      .register-input {
+          width: 100%;
+          height: 48px;
+          background-color: transparent;
+          border: none;
+          
+          color: var(--color-text-light);
+          font-size: 17.926px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+
+          &::placeholder {
+            color: var(--color-text-light);
+          }
+
+          &:focus {
+            outline: none;
+          }
+      }
+
+      .register-input-icon {
+          &.password {
+            cursor: pointer;
+          }
+          &.small {
+            width: 24px;
+            height: 24px;
+          }
+      }
+  }
+
+  .buttons-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 300px;
-    gap: 53px;
-    margin-top: -150px;
-    .register-input-container {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid var(--color-border-guess);
+    width: 100%;
+
+    .register-button {
         width: 100%;
+        height: 40px;
+        border-radius: 4px;
+        background: var(--color-text-primary-light);
+        border: none;
+        color: var(--color-text-light);
+        cursor: pointer;
 
-        .register-input {
-            width: 100%;
-            height: 48px;
-            background-color: transparent;
-            border: none;
-            
-            color: var(--color-text-light);
-            font-size: 17.926px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-
-            &::placeholder {
-              color: var(--color-text-light);
-            }
-
-            &:focus {
-              outline: none;
-            }
+        span {
+          text-align: center;
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 700;
+          font-family: 'Roboto', sans-serif;
+          line-height: 18px;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
         }
 
-        .register-input-icon {
-            &.password {
-              cursor: pointer;
-            }
-            &.small {
-              width: 24px;
-              height: 24px;
-            }
+        &:disabled {
+            background: var(--color-background-disabled);
+            color: var(--color-text-disabled);
+            cursor: not-allowed;
+        }
+
+        &.loading {
+          background: var(--color-background-primary);
+          opacity: 0.8;
+          cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+            background: var(--color-background-primary);
         }
     }
-    .buttons-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      .register-button {
-          width: 100%;
-          height: 40px;
-          border-radius: 4px;
-          background: var(--color-text-primary-light);
-          border: none;
-          color: var(--color-text-light);
-          cursor: pointer;
 
-          span {
-            text-align: center;
-            font-size: 15px;
-            font-style: normal;
-            font-weight: 700;
-            font-family: 'Roboto', sans-serif;
-            line-height: 18px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-          }
-
-          &:disabled {
-              background: var(--color-background-disabled);
-              color: var(--color-text-disabled);
-              cursor: not-allowed;
-          }
-
-          &.loading {
-            background: var(--color-background-primary);
-            opacity: 0.8;
-            cursor: not-allowed;
-          }
-
-          &:hover:not(:disabled) {
-              background: var(--color-background-primary);
-          }
-      }
-      .alternative {
+    .alternative {
       margin: 10px 0;
       width: 100%;
       display: grid;
@@ -199,6 +203,7 @@ function submit() {
       align-items: center;
       font-size: 14px;
       color: var(--color-text-light);
+
       &:before {
         content: "";
         height: 2px;
@@ -212,6 +217,7 @@ function submit() {
         background-color: var(--color-background);
       }
     }
+    
     .login-button {
       width: 100%;
       height: 40px;
@@ -242,6 +248,6 @@ function submit() {
         color: var(--color-text-light);
       }
     }
-    }
+  }
 }
 </style>

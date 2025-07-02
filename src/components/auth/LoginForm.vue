@@ -79,14 +79,16 @@ function submit() {
   align-items: center;
   justify-content: center;
   width: 300px;
-  gap: 53px;
+  gap: 24px;
   margin-top: -150px;
+
   .buttons-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
+
     .login-button {
       width: 100%;
       height: 40px;
@@ -123,6 +125,7 @@ function submit() {
         background: var(--color-background-primary);
       }
     }
+
     .alternative {
       margin: 10px 0;
       width: 100%;
@@ -132,6 +135,7 @@ function submit() {
       align-items: center;
       font-size: 14px;
       color: var(--color-text-light);
+
       &:before {
         content: "";
         height: 2px;
@@ -145,6 +149,7 @@ function submit() {
         background-color: var(--color-background);
       }
     }
+
     .register-button {
       width: 100%;
       height: 40px;
